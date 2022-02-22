@@ -5,11 +5,14 @@ import ImageCard from '../../components/imagecard'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import { graphql } from 'gatsby'
+import SimpleReactLightbox, { SRLWrapper } from "simple-react-lightbox"
+
 
 
 const PhotoAlbum = ({ pageContext, data, location }) => {
   const pageTitle = data.mysqlParentAlbums.album_path.replace(/^.*\/(.*)/, "$1").replace(/^....-..-.. /, "")
   return (
+      <SimpleReactLightbox>
 <BasePage pageContext={pageContext} pageTitle={pageTitle} location={location} image={data.mysqlParentAlbums.album_image_path.replace(/ /g, "%20")} description={data.mysqlParentAlbums.album_caption}>
             <section className="py-5">
                 <div className="container px-5">
@@ -22,16 +25,19 @@ const PhotoAlbum = ({ pageContext, data, location }) => {
                             ))
                         }
                     </div>
-                    <div className="row gx-5">
+                    <SRLWrapper>
+                        <div className="row gx-5">
                         {
                             data.mysqlParentAlbums.images.map(node => (
                                 <ImageCard image={node}/>
                             ))
                         }
-                    </div>
+                        </div>
+                    </SRLWrapper>
                 </div>
             </section>
 </BasePage>
+    </SimpleReactLightbox>
   )
 }
 
