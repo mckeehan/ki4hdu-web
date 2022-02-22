@@ -22,7 +22,7 @@ const BlogPost = ({ pageContext, data, location}) => {
                                     <div className="fw-bold">{data.markdownRemark.frontmatter.author.name}</div>
                                     <div className="text-muted">{data.markdownRemark.frontmatter.date}</div>
                                     {data.markdownRemark.tableOfContents && <div className="ms-3"><div className="toc" dangerouslySetInnerHTML={{ __html: data.markdownRemark.tableOfContents }}/><hr/></div>}
-                                    {data.markdownRemark.frontmatter.tags && <div className="ms-3">{ data.markdownRemark.frontmatter.tags.map(node => ( <TagCard tag={node}/> )) }<hr/></div> }
+                                    {data.markdownRemark.frontmatter.tags && data.markdownRemark.frontmatter.tags.length > 0 && <div className="ms-3">{ data.markdownRemark.frontmatter.tags.map(node => ( <TagCard tag={node}/> )) }<hr/></div> }
                                 </div>
                             </div>
                         </div>

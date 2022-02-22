@@ -4,14 +4,14 @@ import ReactMarkdown from 'react-markdown'
 import rehypeTruncate from "rehype-truncate";
 
 const GalleryCard = ({ album }) => {
+  const pageTitle = album.album_path.replace(/^.*\/(.*)/, "$1").replace(/^....-..-.. /, "")
   return (
                         <div className="col-lg-4 mb-5">
                             <div className="card h-100 shadow border-0">
-                                <img className="card-img-top" src={album.album_image_path.replace(/ /g, '%20')} alt={album.album_path.replace(/^.*\/(.*)/, "$1").replace(/^....-..-.. /, "")} />
+                                <img className="card-img-top" src={album.album_image_path.replace(/ /g, '%20')} alt={pageTitle} />
                                 <div className="card-body p-4">
-                                    {/*<div className="badge bg-primary bg-gradient rounded-pill mb-2">News</div> */}
-                                    <Link className="text-decoration-none link-dark stretched-link" to={"/photos" + album.album_path.replace(/ /g,'-').toLowerCase()}><div className="h5 card-title mb-3">{album.album_path.replace(/^.*\/(.*)/, "$1").replace(/^....-..-.. /, "")}</div></Link>
-                                    {/* album.album_caption && <p className="card-text mb-0">{album.album_caption}</p> */}
+                                    <div className="badge bg-primary bg-gradient rounded-pill mb-2">gallery</div>
+                                    <Link className="text-decoration-none link-dark stretched-link" to={"/photos" + album.album_path.replace(/ /g,'-').replace(/-+/g,'-').toLowerCase()}><div className="h5 card-title mb-3">{pageTitle}</div></Link>
                                     {album.album_caption && <ReactMarkdown rehypePlugins={[rehypeTruncate]} className="card-text mb-0">{album.album_caption}</ReactMarkdown>}
                                 </div>
                                 <div className="card-footer p-4 pt-0 bg-transparent border-top-0">

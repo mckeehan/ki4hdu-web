@@ -33,6 +33,7 @@ export const query = graphql`
         excerpt
         fields {
           slug
+          collection
         }
         frontmatter {
           title
