@@ -1,6 +1,9 @@
 const path = require("path")
 const { createFilePath } = require("gatsby-source-filesystem")
 const { slash } = require(`gatsby-core-utils`)
+const _ = require(`lodash`)
+const slugify = require(`slugify`); // Traverse is a es6 module...
+
 
 Array.prototype.contains = function(v) {
   for (var i = 0; i < this.length; i++) {
@@ -19,12 +22,14 @@ Array.prototype.unique = function() {
   return arr;
 };
 
-Array.prototype.explode = function() {
+Array.prototype.explode = function(separator) {
   var arr = [];
   for (var i = 0; i < this.length; i++) {
-    var subarr = this[i].split('/');
+    if(this[i]) {
+    var subarr = this[i].split(separator);
     for (var j = 0; j <= subarr.length; j++) {
-      arr.push( subarr.slice(0,j).join('/') )
+      arr.push( subarr.slice(0,j).join(separator) )
+    }
     }
   }
   return arr;
@@ -102,6 +107,56 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
+  //get all phototag pages
+  let phototagPages = []
+  const phototagPageQuery = await graphql(`{
+    allMysqlTags {
+      edges {
+        node {
+          name
+          tag_full
+        }
+      }
+    }
+    photoTagDirs: allMysqlTags {
+        distinct(field: tag_hierarchy)
+    }
+  }`)
+
+  if (phototagPageQuery.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    return
+  }
+
+  // Create phototag  pages
+  phototagPageQuery.data.allMysqlTags.edges.forEach(({ node }) => {
+    const slug = node.tag_full.split('/').map( e => _.kebabCase(e) ).join('/');
+    phototagPages.push(slug)
+    createPage({
+      path: '/phototags' + slug,
+      component: path.resolve(`./src/templates/phototag.js`),
+      context: {
+        slug: slug,
+        pageTitle: node.name,
+        tag_full: node.tag_full
+      },
+    })
+  })
+
+  phototagPageQuery.data.photoTagDirs.distinct.explode('/').unique().filter( p => !phototagPages.includes(p)).forEach( ptdir => {
+    const slug = ptdir.split('/').map( e => _.kebabCase(e) ).join('/');
+    const pageTitle = ptdir.split('/').slice(-1)[0].replace(/_/g, ' ')
+    createPage({
+      path: '/phototags' + slug,
+      component: path.resolve(`./src/templates/phototag.js`),
+      context: {
+        slug: slug,
+        pageTitle: pageTitle,
+        tag_full: ptdir,
+      },
+    })
+  })
+
   //get all gpxmarkdown
   let gpxpages = []
   const gpxmarkdown = await graphql(`{
@@ -153,7 +208,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  gpxDirs.data.allGpxDirs.distinct.explode().unique().filter( n => n ).filter( p => !gpxpages.includes(p)).forEach( gpxdir => {
+  gpxDirs.data.allGpxDirs.distinct.explode('/').unique().filter( n => n ).filter( p => !gpxpages.includes(p)).forEach( gpxdir => {
     createPage({
       path: '/maps' + gpxdir,
       component: path.resolve(`./src/templates/gpxpage.js`),

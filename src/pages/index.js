@@ -3,6 +3,7 @@ import { Link, graphql } from 'gatsby'
 import HomePage from '../components/homepage'
 import Headshot from '../../static/wm-2012-600x400.png'
 import BlogCard from '../components/blogcard'
+import { FaTwitter, } from 'react-icons/fa'
 
 const IndexPage = ({ pageContext, data, location }) => {
   return (
@@ -17,8 +18,12 @@ const IndexPage = ({ pageContext, data, location }) => {
                                 <p className="lead fw-normal text-white-50 mb-4">
                                     This is my personal website. In it I have placed information about my interest and hobbies that others may find interesting.
                                 </p>
-                                <p className="display-5 text-center">
-                                    <a href="https://twitter.com/mckeehan?ref_src=twsrc%5Etfw" className="twitter-follow-button" data-size="large" data-show-count="false">Follow @mckeehan</a>
+                                <p className="text-center">
+                                    <div>
+                                        <a id="follow-button" className="rounded-pill p-2 twitter-button text-white text-decoration-none" title="Follow @mckeehan on Twitter" href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.ki4hdu.com%2F&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Emckeehan&amp;region=follow_link&amp;screen_name=mckeehan">
+                                          <span className1="text-light"><FaTwitter/> Follow <b>@mckeehan</b></span>
+                                        </a>
+                                    </div>
                                 </p>
                             </div>
                         </div>

@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 import { Polyline, Marker, Popup } from "react-leaflet";
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
+import { FaTag, FaFile, FaFolder } from 'react-icons/fa'
 
 let iconCollection = {
     getIcon: function(sym) {
@@ -349,10 +350,16 @@ const WaypointCard = ({ waypoint }) => {
       </div>
 )}
 
-const GpxCard = ({ name, link }) => {
+const GpxCard = ({ name, link, type }) => {
   return (
             <div className="card-body">
-                <Link className="text-decoration-none link-dark stretched-link" to={link}>{name.replace(/_/g," ")}</Link>
+                <Link className="text-decoration-none link-dark stretched-link" to={link}>
+                  { type === "tag" && <FaTag/> }
+                  { type === "file" && <FaFile/> }
+                  { type === "folder" && <FaFolder/> }
+                  &nbsp;
+                  {name.replace(/_/g," ")}
+                </Link>
             </div>
 )}
 

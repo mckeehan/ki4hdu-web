@@ -1,3 +1,7 @@
+.twitter-button {
+  background-color: #1d9bf0;
+}
+
 ul { list-style-position:inside; margin-left: 2px; display: table; }
 ul li {margin-left: 13px; text-indent: -12px; }
 ul li p { display: inline; }
@@ -185,8 +189,6 @@ figure img {
 }
 
 figcaption {
-  background-color: black;
-  color: white;
   font-style: italic;
   padding: 2px;
   text-align: center;

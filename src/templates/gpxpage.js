@@ -119,7 +119,7 @@ const MapPage = ({ pageContext, data, location }) => {
                         ))}
                         {children.length > 0 && children.map( gpxdir => (
                           <div className="card col-lg-4 col-md-6">
-                              <GpxCard type="dir" link={`/maps${gpxdir}`} name={gpxdir.split('/').slice(-1)[0]}/>
+                              <GpxCard type="folder" link={`/maps${gpxdir}`} name={gpxdir.split('/').slice(-1)[0]}/>
                           </div>
                         ))}
                         {data.allGpXfile.edges && data.allGpXfile.edges.map(gpxNode => (

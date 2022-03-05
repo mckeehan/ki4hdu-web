@@ -61,6 +61,10 @@ export const query = graphql`
           image_title
           creationDate(formatString: "MMMM D, YYYY")
           full_image_path
+          tags {
+            name
+            tag_full
+          }
         }
     }
 }

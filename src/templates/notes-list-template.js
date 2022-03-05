@@ -37,7 +37,7 @@ export const query = graphql`
   query notesListQuery($skip: Int!, $limit: Int!){
     allMarkdownRemark(
       filter: { fields: { collection: { eq: "notes" } } }
-      sort: {fields: frontmatter___date, order: DESC}
+      sort: {fields: frontmatter___title}
       limit: $limit
       skip: $skip
     ) {
