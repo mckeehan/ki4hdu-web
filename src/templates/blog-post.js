@@ -17,9 +17,13 @@ const BlogPost = ({ pageContext, data, location}) => {
                     <div className="row gx-5">
                         <div className="col-lg-3 bg-light">
                             <div className="d-flex align-top mt-lg-5 mb-4 ">
+                                { data.markdownRemark.frontmatter.author &&
                                 <img className="rounded-circle" width="40" height="40" src={data.markdownRemark.frontmatter.author.avatar} alt={data.markdownRemark.frontmatter.author.name}/>
+                                }
                                 <div className="ms-3">
+                                    { data.markdownRemark.frontmatter.author &&
                                     <div className="fw-bold">{data.markdownRemark.frontmatter.author.name}</div>
+                                    }
                                     <div className="text-muted">{data.markdownRemark.frontmatter.date}</div>
                                     {data.markdownRemark.tableOfContents && <div className="ms-3"><div className="toc" dangerouslySetInnerHTML={{ __html: data.markdownRemark.tableOfContents }}/><hr/></div>}
                                     {data.markdownRemark.frontmatter.tags && data.markdownRemark.frontmatter.tags.length > 0 && <div className="ms-3">{ data.markdownRemark.frontmatter.tags.map(node => ( <TagCard tag={node}/> )) }<hr/></div> }

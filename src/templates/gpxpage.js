@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import BasePage from '../components/basepage'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
@@ -76,6 +76,9 @@ const MapPage = ({ pageContext, data, location }) => {
                          </div>
                      </div>
                      }
+                     {data.gpXfile &&
+                     <Link to={`/gpx/${data.gpXfile.relativePath}`}>Download</Link>
+                     }
                  </div>
                  <div className="col-lg-9">
                      {!data.markdownRemark && <h1>{pageTitle}</h1>}
@@ -91,7 +94,7 @@ const MapPage = ({ pageContext, data, location }) => {
                          </section>
                          }
                          {data.markdownRemark && <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}/>}
-                         {data.gpXfile && data.gpXfile.properties.desc && <ReactMarkdown rehypePlugins={[rehypeRaw]}>{data.gpXfile.properties.desc}</ReactMarkdown>}
+                         {data.gpXfile && data.gpXfile.properties && data.gpXfile.properties.desc && <ReactMarkdown rehypePlugins={[rehypeRaw]}>{data.gpXfile.properties.desc}</ReactMarkdown>}
                      </article>
                     <section className="py-5">
                       <div className="container px-5 row">

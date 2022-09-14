@@ -38,8 +38,10 @@ Array.prototype.explode = function(separator) {
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
+  let relativePath = "/"
   if (node.internal.type === `GPXLineString`) {
-    const relativePath = createFilePath({ node, getNode, trailingSlash: false }).replace(/[|&;$%@"<>()+,]/g, "").replaceAll(/ /g, '-').toLowerCase()
+    relativePath = createFilePath({ node, getNode, trailingSlash: false }).replace(/[|&;$%@"<>()+,]/g, "").replaceAll(/ /g, '-').toLowerCase()
+  }
     const { dir = ``, name } = path.parse(relativePath)
 
    createNodeField({
@@ -60,7 +62,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       value: relativePath,
     });
 
-  }
 
   if (node.internal.type === `MarkdownRemark`) {
     const parent = getNode(node.parent);
@@ -178,7 +179,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
     return
   }
-
   // Create gpx  pages
   gpxmarkdown.data.allMarkdownRemark.edges.forEach(({ node }) => {
     gpxpages.push(node.fields.slug)
