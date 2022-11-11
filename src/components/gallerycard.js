@@ -8,7 +8,7 @@ const GalleryCard = ({ album }) => {
   return (
                         <div className="col-lg-4 mb-5">
                             <div className="card h-100 shadow border-0">
-                                <img className="card-img-top" src={album.album_image_path.replace(/ /g, '%20')} alt={pageTitle} />
+                                <img loading="lazy" className="card-img-top" src={album.album_image_path.replace(/ /g, '%20')} alt={pageTitle} />
                                 <div className="card-body p-4">
                                     <div className="badge bg-primary bg-gradient rounded-pill mb-2">gallery</div>
                                     <Link className="text-decoration-none link-dark stretched-link" to={"/photos" + album.album_path.replace(/ /g,'-').replace(/-+/g,'-').toLowerCase()}><div className="h5 card-title mb-3">{pageTitle}</div></Link>

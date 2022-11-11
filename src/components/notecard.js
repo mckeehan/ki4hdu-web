@@ -7,7 +7,7 @@ const NoteCard = ({ note }) => {
   return (
                         <div className="col-lg-4 mb-5">
                             <div className="card h-100 shadow border-0">
-                                {note.frontmatter.featuredImage && <img className="card-img-top" src={note.frontmatter.featuredImage} alt="" />}
+                                {note.frontmatter.featuredImage && <img loading="lazy" className="card-img-top" src={note.frontmatter.featuredImage} alt="" />}
                                 <div className="card-body p-4">
                                     <div className="badge bg-primary bg-gradient rounded-pill mb-2">{note.fields.collection}</div>
                                     <Link className="text-decoration-none link-dark stretched-link" to={linkPath}><div className="h5 card-title mb-3">{note.frontmatter.title}</div></Link>
@@ -17,7 +17,7 @@ const NoteCard = ({ note }) => {
                                     <div className="d-flex align-items-end justify-content-between">
                                         { note.frontmatter.author && (
                                           <div className="d-flex align-items-center">
-                                              <img className="rounded-circle me-3" width="40" height="40" src={avatar} alt={note.frontmatter.author.name}/>
+                                              <img loading="lazy" className="rounded-circle me-3" width="40" height="40" src={avatar} alt={note.frontmatter.author.name}/>
                                               <div className="small">
                                                   <div className="fw-bold">{note.frontmatter.author.name}</div>
                                                   {note.frontmatter.date && <div className="text-muted">{note.frontmatter.date}</div>}

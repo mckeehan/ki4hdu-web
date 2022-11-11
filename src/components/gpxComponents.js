@@ -340,7 +340,7 @@ const WaypointCard = ({ waypoint }) => {
   return (
       <div className="row g-2 align-items-center">
           <div className="col-md-2">
-              <img width="24" src={image} alt={waypoint.properties.sym}/>
+              <img loading="lazy" width="24" src={image} alt={waypoint.properties.sym}/>
           </div>
           <div className="col-md-10">
               <div className="wpt-cmt mb-1"><b>{waypoint.properties.name}</b></div>

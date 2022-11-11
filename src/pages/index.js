@@ -39,25 +39,25 @@ const IndexPage = ({ pageContext, data, location }) => {
                     <div className="row gx-5">
                         <div className="col-lg-6">
                             <div className="position-relative mb-5 text-center">
-                                <img className="img-fluid rounded-3 mb-3" src="https://ki4hdu.com/_resources/amateur-radio-cover.jpg" alt="" />
+                                <img loading="lazy" className="img-fluid rounded-3 mb-3" src="https://ki4hdu.com/_resources/amateur-radio-cover.jpg" alt="amateur radio" />
                                 <Link className="h3 fw-bolder text-decoration-none link-dark stretched-link" to="/amateur-radio">Amateur Radio</Link>
                             </div>
                         </div>
                         <div className="col-lg-6">
                             <div className="position-relative mb-5 text-center">
-                                <img className="img-fluid rounded-3 mb-3" src="https://ki4hdu.com/_resources/off-road-cover.jpg" alt="" />
+                                <img loading="lazy" className="img-fluid rounded-3 mb-3" src="https://ki4hdu.com/_resources/off-road-cover.jpg" alt="off-road" />
                                 <Link className="h3 fw-bolder text-decoration-none link-dark stretched-link" to="/off-road">Off-Road</Link>
                             </div>
                         </div>
                         <div className="col-lg-6">
                             <div className="position-relative mb-5 text-center">
-                                <img className="img-fluid rounded-3 mb-3" src="https://ki4hdu.com/_resources/todo.jpg" alt="" />
+                                <img loading="lazy" className="img-fluid rounded-3 mb-3" src="https://ki4hdu.com/_resources/todo.jpg" alt="todo" />
                                 <Link className="h3 fw-bolder text-decoration-none link-dark stretched-link" to="productivity">Productivity</Link>
                             </div>
                         </div>
                         <div className="col-lg-6">
                             <div className="position-relative mb-5 text-center">
-                                <img className="img-fluid rounded-3 mb-3" src="https://dummyimage.com/600x400/343a40/6c757d" alt="" />
+                                <img loading="lazy" className="img-fluid rounded-3 mb-3" src="https://ki4hdu.com/_resources/clipart_tipsandtricks.jpg" alt="tips and tricks" />
                                 <Link className="h3 fw-bolder text-decoration-none link-dark stretched-link" to="tips-and-tricks">Tips & Tricks</Link>
                             </div>
                         </div>

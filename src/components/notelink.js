@@ -7,7 +7,7 @@ const NoteLink = ({ note }) => {
             <div className="row no-gutters">
                 {note.frontmatter.featuredImage &&
                   <div className="col-sm-5 py-3">
-                    <img className="card-img-top" src={note.frontmatter.featuredImage} alt=""/>
+                    <img loading="lazy" className="card-img-top" src={note.frontmatter.featuredImage} alt=""/>
                   </div>
                 }
                 <div className="col-sm-7">
