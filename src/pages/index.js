@@ -6,6 +6,7 @@ import BlogCard from '../components/blogcard'
 import { FaTwitter, } from 'react-icons/fa'
 
 const IndexPage = ({ pageContext, data, location }) => {
+  const nextPage = "/blog/p/2"
   return (
     <HomePage pageContext={pageContext} pageTitle="Home" location={location} >
             <header className="bg-dark">
@@ -21,7 +22,7 @@ const IndexPage = ({ pageContext, data, location }) => {
                                 <p className="text-center">
                                     <div>
                                         <a id="follow-button" className="rounded-pill p-2 twitter-button text-white text-decoration-none" title="Follow @mckeehan on Twitter" href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.ki4hdu.com%2F&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Emckeehan&amp;region=follow_link&amp;screen_name=mckeehan">
-                                          <span className1="text-light"><FaTwitter/> Follow <b>@mckeehan</b></span>
+                                          <span className="text-light"><FaTwitter/> Follow <b>@mckeehan</b></span>
                                         </a>
                                     </div>
                                 </p>
@@ -70,16 +71,22 @@ const IndexPage = ({ pageContext, data, location }) => {
                         <div className="col-lg-8 col-xl-6">
                             <div className="text-center">
                                 <h2 className="fw-bolder">From my blog</h2>
-                                <p className="lead fw-normal text-muted mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
+                                <p className="lead fw-normal text-muted mb-5">Some random thougts.</p>
                             </div>
                         </div>
                     </div>
                     <div className="row gx-5">
                         {
-                            data.allMarkdownRemark.nodes.map(node => (
-                                <BlogCard blog={node}/>
+                            data.allMarkdownRemark.nodes.map((node,index) => (
+                                <BlogCard blog={node} key={index}/>
                             ))
                         }
+                    </div>
+                    <div className="text-end mb-5 mb-xl-0">
+                        <Link className="text-decoration-none" to={nextPage}>
+                          Older entries
+                          <i className="bi bi-arrow-right"></i>
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -90,7 +97,7 @@ const IndexPage = ({ pageContext, data, location }) => {
 export const query = graphql`
   query homePageBlogListQuery {
     allMarkdownRemark(
-      filter: { fields: { collection: { eq: "blog" } } }
+      filter: {fields: {collection: {eq: "blog"}}, frontmatter: {public: {eq: "yes"}}}
       sort: {fields: frontmatter___date, order: DESC}
       limit: 3
     ) {

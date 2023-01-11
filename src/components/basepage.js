@@ -17,8 +17,10 @@ const BasePage = ({ pageContext, pageTitle, location, image, description, childr
           description={description}
         />
         <main className="flex-shrink-0">
-            <SiteNavigation/>
-            <Breadcrumb crumbs={crumbs} crumbSeparator=" / " />
+            <header class="no-print">
+              <SiteNavigation/>
+              <Breadcrumb crumbs={crumbs} crumbSeparator=" / " />
+            </header>
             {children}
         </main>
         <Footer/>

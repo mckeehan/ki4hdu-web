@@ -28,7 +28,7 @@ const BlogHome = ({ pageContext, data, location }) => {
                     <div className="text-end mb-5 mb-xl-0">
                         {!isLast && (
                           <Link className="text-decoration-none" to={nextPage}>
-                            Older stories
+                            Older entries
                             <i className="bi bi-arrow-right"></i>
                           </Link>
                         )}
@@ -42,7 +42,7 @@ const BlogHome = ({ pageContext, data, location }) => {
 export const query = graphql`
   query blogListQuery($skip: Int!, $limit: Int!){
     allMarkdownRemark(
-      filter: { fields: { collection: { eq: "blog" } } }
+      filter: {fields: {collection: {eq: "blog"}}, frontmatter: {public: {eq: "yes"}}}
       sort: {fields: frontmatter___date, order: DESC}
       limit: $limit
       skip: $skip

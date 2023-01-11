@@ -15,7 +15,7 @@ const BlogPost = ({ pageContext, data, location}) => {
             <section>
                 <div className="container px-5 my-5">
                     <div className="row gx-5">
-                        <div className="col-lg-3 bg-light">
+                        <div className="col-lg-3 bg-light no-print">
                             <div className="d-flex align-top mt-lg-5 mb-4 ">
                                 { data.markdownRemark.frontmatter.author &&
                                 <img className="rounded-circle" width="40" height="40" src={data.markdownRemark.frontmatter.author.avatar} alt={data.markdownRemark.frontmatter.author.name}/>
@@ -34,7 +34,7 @@ const BlogPost = ({ pageContext, data, location}) => {
                             {data.markdownRemark.frontmatter.title && <h1 className="d-none">{data.markdownRemark.frontmatter.title}</h1>}
                             <article className="clearfix">
                                 {data.markdownRemark.frontmatter.featuredImage &&
-                                    <section className="w-50 float-md-end">
+                                    <section className="w-50 float-md-end no-print">
                                       <figure className="figure">
                                         <Zoom>
                                           <img className="img-fluid" src={data.markdownRemark.frontmatter.featuredImage} alt="" />

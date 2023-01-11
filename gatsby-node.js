@@ -231,7 +231,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   //get all blog markdown
   const result = await graphql(`{
         allMarkdownRemark(
-          filter: { fields: { collection: { eq: "blog" } } }
+          filter: {fields: {collection: {eq: "blog"}}, frontmatter: {public: {eq: "yes"}}}
           limit: 1000
         ) {
           edges {
@@ -281,7 +281,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Get all notes markdown
   const notes_result = await graphql(`{
         allMarkdownRemark(
-          filter: { fields: { collection: { eq: "notes" } } }
+          filter: {fields: {collection: {eq: "notes"}}, frontmatter: {public: {eq: "yes"}}}
           limit: 1000
         ) {
           edges {
