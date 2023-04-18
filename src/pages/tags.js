@@ -33,12 +33,12 @@ return (
 export default TagsPage
 
 export const pageQuery = graphql`
-  query {
-    allMarkdownRemark {
-      group(field: frontmatter___tags) {
-        fieldValue
-        totalCount
-      }
+query pageUsersmckeehansrcki4HduWebsrcpagestagsJs4172131656 {
+  allMarkdownRemark {
+    group(field: {frontmatter: {tags: SELECT}}) {
+      fieldValue
+      totalCount
     }
   }
+}
 `

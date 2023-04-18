@@ -40,30 +40,30 @@ const BlogHome = ({ pageContext, data, location }) => {
 }
 
 export const query = graphql`
-  query blogListQuery($skip: Int!, $limit: Int!){
-    allMarkdownRemark(
-      filter: {fields: {collection: {eq: "blog"}}, frontmatter: {public: {eq: "yes"}}}
-      sort: {fields: frontmatter___date, order: DESC}
-      limit: $limit
-      skip: $skip
-    ) {
-      nodes {
-        excerpt
-        fields {
-          slug
+query blogListQuery($skip: Int!, $limit: Int!) {
+  allMarkdownRemark(
+    filter: {fields: {collection: {eq: "blog"}}, frontmatter: {public: {eq: "yes"}}}
+    sort: {frontmatter: {date: DESC}}
+    limit: $limit
+    skip: $skip
+  ) {
+    nodes {
+      excerpt
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        author {
+          name
+          avatar
         }
-        frontmatter {
-          title
-          author {
-            name
-            avatar
-          }
-          date(formatString: "MMMM D, YYYY")
-          featuredImage
-        }
+        date(formatString: "MMMM D, YYYY")
+        featuredImage
       }
     }
   }
+}
 `
 
 export default BlogHome

@@ -4,9 +4,8 @@ import TagCard from '../components/tagcard'
 import NoteLink from '../components/notelink'
 import GalleryCard from '../components/gallerycard'
 import { Link, graphql } from 'gatsby'
-import Zoom from 'react-medium-image-zoom'
 
-import 'react-medium-image-zoom/dist/styles.css'
+//import 'react-medium-image-zoom/dist/styles.css'
 
 const BlogPost = ({ pageContext, data, location}) => {
   const relatedNotes = data.allMarkdownRemark.nodes.filter( node => node.fields.mydir === data.markdownRemark.fields.slug );
@@ -36,9 +35,7 @@ const BlogPost = ({ pageContext, data, location}) => {
                                 {data.markdownRemark.frontmatter.featuredImage &&
                                     <section className="w-50 float-md-end no-print">
                                       <figure className="figure">
-                                        <Zoom>
                                           <img className="img-fluid" src={data.markdownRemark.frontmatter.featuredImage} alt="" />
-                                        </Zoom>
                                         {data.markdownRemark.frontmatter.featuredImageCaption && <figcaption className="figure-caption" >{data.markdownRemark.frontmatter.featuredImageCaption}</figcaption>}
                                       </figure>
                                     </section>
@@ -86,73 +83,73 @@ const BlogPost = ({ pageContext, data, location}) => {
 }
 
 export const query = graphql`
-  query ($slug: String) {
-    markdownRemark( fields: {slug: {eq: $slug}}) {
+query pageUsersmckeehansrcki4HduWebsrctemplatesblogPostJs2106917372($slug: String) {
+  markdownRemark(fields: {slug: {eq: $slug}}) {
+    fields {
+      mydir
+      slug
+    }
+    headings {
+      value
+      depth
+    }
+    frontmatter {
+      title
+      author {
+        name
+        avatar
+      }
+      date(formatString: "MMMM D, YYYY")
+      featuredImage
+      featuredImageCaption
+      tags
+    }
+    excerpt
+    html
+    tableOfContents(maxDepth: 3)
+  }
+  allMarkdownRemark(sort: {frontmatter: {title: ASC}}) {
+    nodes {
+      excerpt
       fields {
         mydir
         slug
       }
-      headings {
-          value
-          depth
-      }
       frontmatter {
         title
-        author  {
+        author {
           name
           avatar
         }
         date(formatString: "MMMM D, YYYY")
         featuredImage
-        featuredImageCaption
-        tags
       }
-      excerpt
-      html
-      tableOfContents(maxDepth: 3)
-    }
-    allMarkdownRemark( sort: {fields: frontmatter___title} ) {
-      nodes {
-        excerpt
-        fields {
-          mydir
-          slug
-        }
-        frontmatter {
-          title
-          author {
-            name
-            avatar
-          }
-          date(formatString: "MMMM D, YYYY")
-          featuredImage
-        }
-      }
-    }
-    mysqlParentAlbums( fields: {slug: {eq: $slug}} ) {
-        fields {
-          slug
-        }
-        album_path
-        album_caption
-        album_date(formatString: "MMMM D, YYYY")
-        album_image_path
-        albums {
-          album_path
-          album_caption
-          album_date(formatString: "MMMM D, YYYY")
-          album_image_path
-        }
-        images {
-          image_path
-          image_name
-          image_caption
-          image_title
-          creationDate(formatString: "MMMM D, YYYY")
-          full_image_path
-        }
     }
   }
+  mysqlParentAlbums(fields: {slug: {eq: $slug}}) {
+    fields {
+      slug
+    }
+    album_path
+    album_caption
+    album_date(formatString: "MMMM D, YYYY")
+    album_image_path
+    albums {
+      album_path
+      album_caption
+      album_date(formatString: "MMMM D, YYYY")
+      album_image_path
+    }
+    images {
+      image_path
+      image_name
+      image_caption
+      image_title
+      creationDate(formatString: "MMMM D, YYYY")
+      full_image_path
+    }
+  }
+}
 `
 
 export default BlogPost

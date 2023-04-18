@@ -49,7 +49,7 @@ const PhotosHome = ({ pageContext, data, location}) => {
                             const slug = child.split('/').map( e => _.kebabCase(e) ).join('/');
                             const pageTitle = child.split('/').slice(-1)[0].replace(/_/g, ' ')
                             return (
-                                <div className="card col-lg-4 col-md-6">
+                                <div className="phototagcard card col-lg-4 col-md-6">
                                   <GpxCard type="tag" link={`/phototags${slug}`} name={pageTitle}/>
                                 </div>
                             )
@@ -58,7 +58,7 @@ const PhotosHome = ({ pageContext, data, location}) => {
                 </div>
                     
                 <div className="container px-5">
-                    <h2 className="fw-bolder fs-5 mb-4">Photo Galleries</h2>
+                    <h2 className="fw-bolder fs-5 mb-4 mt-4">Photo Galleries</h2>
                     <div className="row gx-5">
                         {
                             data.allMysqlAlbums.nodes.map(node => (
@@ -72,13 +72,14 @@ const PhotosHome = ({ pageContext, data, location}) => {
   )
 }
 
-export const query = graphql`query MyQuery {
-  allMysqlTags(sort: {fields: tag_full}) {
-    distinct(field: tag_full)
+export const query = graphql`
+query MyQuery {
+  allMysqlTags(sort: {tag_full: ASC}) {
+    distinct(field: {tag_full: SELECT})
   }
   allMysqlAlbums(
-    sort: {fields: album_date, order: DESC}
-    filter: {album_path: {regex: "/^\/(?!.*\/)/"}}
+    sort: {album_date: DESC}
+    filter: {album_path: {regex: "/^/(?!.*/)/"}}
   ) {
     nodes {
       album_path

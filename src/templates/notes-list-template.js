@@ -34,30 +34,30 @@ const NotesHome = ({ pageContext, data, location }) => {
 }
 
 export const query = graphql`
-  query notesListQuery($skip: Int!, $limit: Int!){
-    allMarkdownRemark(
-      filter: { fields: { collection: { eq: "notes" } } }
-      sort: {fields: frontmatter___title}
-      limit: $limit
-      skip: $skip
-    ) {
-      nodes {
-        excerpt
-        fields {
-          slug
+query notesListQuery($skip: Int!, $limit: Int!) {
+  allMarkdownRemark(
+    filter: {fields: {collection: {eq: "notes"}}}
+    sort: {frontmatter: {title: ASC}}
+    limit: $limit
+    skip: $skip
+  ) {
+    nodes {
+      excerpt
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        author {
+          name
+          avatar
         }
-        frontmatter {
-          title
-          author {
-            name
-            avatar
-          }
-          date(formatString: "MMMM D, YYYY")
-          featuredImage
-        }
+        date(formatString: "MMMM D, YYYY")
+        featuredImage
       }
     }
   }
+}
 `
 
 export default NotesHome

@@ -7,7 +7,7 @@ const GalleryCard = ({ album }) => {
   const pageTitle = album.album_path.replace(/^.*\/(.*)/, "$1").replace(/^....-..-.. /, "")
   return (
                         <div className="col-lg-4 mb-5">
-                            <div className="card h-100 shadow border-0">
+                            <div className="gallerycardcomponent card h-100 shadow border-0">
                                 <img loading="lazy" className="card-img-top" src={album.album_image_path.replace(/ /g, '%20')} alt={pageTitle} />
                                 <div className="card-body p-4">
                                     <div className="badge bg-primary bg-gradient rounded-pill mb-2">gallery</div>

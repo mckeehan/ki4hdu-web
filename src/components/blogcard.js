@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 const BlogCard = ({ blog }) => {
   return (
                         <div className="col-lg-4 mb-5">
-                            <div className="card h-100 shadow border-0">
+                            <div className="blogcardcomponent card h-100 shadow border-0">
                                 {blog.frontmatter.featuredImage && <img loading="lazy" className="card-img-top" src={blog.frontmatter.featuredImage} alt="" />}
                                 <div className="card-body p-4">
                                     {/*<div className="badge bg-primary bg-gradient rounded-pill mb-2">News</div>*/}

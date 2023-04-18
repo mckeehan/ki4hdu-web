@@ -27,7 +27,8 @@ Array.prototype.explode = function(separator) {
   for (var i = 0; i < this.length; i++) {
     if(this[i]) {
     var subarr = this[i].split(separator);
-    for (var j = 0; j <= subarr.length; j++) {
+    arr.push(separator);
+    for (var j = 2; j <= subarr.length; j++) {
       arr.push( subarr.slice(0,j).join(separator) )
     }
     }
@@ -111,18 +112,18 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   //get all phototag pages
   let phototagPages = []
   const phototagPageQuery = await graphql(`{
-    allMysqlTags {
-      edges {
-        node {
-          name
-          tag_full
-        }
+  allMysqlTags {
+    edges {
+      node {
+        name
+        tag_full
       }
     }
-    photoTagDirs: allMysqlTags {
-        distinct(field: tag_hierarchy)
-    }
-  }`)
+  }
+  photoTagDirs: allMysqlTags {
+    distinct(field: {tag_hierarchy: SELECT})
+  }
+}`)
 
   if (phototagPageQuery.errors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
@@ -193,15 +194,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 
   const gpxDirs = await graphql(`{
-    allGpxDirs: allGpXfile {
-      distinct(field: mydir)
+  allGpxDirs: allGpXfile {
+    distinct(field: {mydir: SELECT})
+  }
+  allGpXfile {
+    nodes {
+      slug
     }
-    allGpXfile {
-      nodes {
-        slug
-      }
-    }
-  }`)
+  }
+}`)
 
   if (gpxDirs.errors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
@@ -223,7 +224,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       path: '/maps' + node.slug,
       component: path.resolve(`./src/templates/gpxpage.js`),
       context: {
-        slug: node.slug
+        slug: node.slug,
+        id: node.id
       },
     })
   })
@@ -327,6 +329,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
   })
 
+
 /*
   // Get all gpx directories
   const gpx_result = await graphql(`{
@@ -350,16 +353,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       },
     })
   })
+ * 2023-01-31 wjm
 */
 
   const tag_result = await graphql(`
     {
-      tagsGroup: allMarkdownRemark {
-        group(field: frontmatter___tags) {
-          fieldValue
-        }
-      }
+  tagsGroup: allMarkdownRemark {
+    group(field: {frontmatter: {tags: SELECT}}) {
+      fieldValue
     }
+  }
+}
   `)
 
   // handle errors

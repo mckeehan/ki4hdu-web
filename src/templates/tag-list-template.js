@@ -24,29 +24,29 @@ const TagsHome = ({ pageContext, data, location }) => {
 }
 
 export const query = graphql`
-  query tagListQuery($tag: String){
-    allMarkdownRemark(
-      filter: { frontmatter: { tags: { in: [$tag] } } }
-      sort: {fields: frontmatter___title }
-    ) {
-      nodes {
-        excerpt
-        fields {
-          slug
-          collection
+query tagListQuery($tag: String) {
+  allMarkdownRemark(
+    filter: {frontmatter: {tags: {in: [$tag]}}}
+    sort: {frontmatter: {title: ASC}}
+  ) {
+    nodes {
+      excerpt
+      fields {
+        slug
+        collection
+      }
+      frontmatter {
+        title
+        author {
+          name
+          avatar
         }
-        frontmatter {
-          title
-          author {
-            name
-            avatar
-          }
-          date(formatString: "MMMM D, YYYY")
-          featuredImage
-        }
+        date(formatString: "MMMM D, YYYY")
+        featuredImage
       }
     }
   }
+}
 `
 
 export default TagsHome

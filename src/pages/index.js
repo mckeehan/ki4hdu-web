@@ -95,29 +95,30 @@ const IndexPage = ({ pageContext, data, location }) => {
 }
 
 export const query = graphql`
-  query homePageBlogListQuery {
-    allMarkdownRemark(
-      filter: {fields: {collection: {eq: "blog"}}, frontmatter: {public: {eq: "yes"}}}
-      sort: {fields: frontmatter___date, order: DESC}
-      limit: 3
-    ) {
-      nodes {
-        excerpt
-        fields {
-          slug
+query homePageBlogListQuery {
+  allMarkdownRemark(
+    filter: {fields: {collection: {eq: "blog"}}, frontmatter: {public: {eq:
+"yes"}}}
+    sort: {frontmatter: {date: DESC}}
+    limit: 3
+  ) {
+    nodes {
+      excerpt
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        author {
+          name
+          avatar
         }
-        frontmatter {
-          title
-          author {
-            name
-            avatar
-          }
-          date(formatString: "MMMM D, YYYY")
-          featuredImage
-        }
+        date(formatString: "MMMM D, YYYY")
+        featuredImage
       }
     }
   }
+}
 `
 
 export default IndexPage

@@ -52,7 +52,7 @@ const TagsPage = ({ pageContext, data, location }) => {
                             const slug = child.split('/').map( e => _.kebabCase(e) ).join('/');
                             const pageTitle = child.split('/').slice(-1)[0].replace(/_/g, ' ')
                             return (
-                                <div className="card col-lg-4 col-md-6">
+                                <div className="tagCard card col-lg-4 col-md-6">
                                   <GpxCard type="tag" link={`/phototags${slug}`} name={pageTitle}/>
                                 </div>
                             )
@@ -75,27 +75,28 @@ const TagsPage = ({ pageContext, data, location }) => {
 export default TagsPage
 
 export const photoTopicQuery = graphql`
-  query photoTagQuery( $tag_full: String) {
-    allMysqlTags(sort: {fields: tag_full}) {
-      distinct(field: tag_full)
-    }
-    mysqlTags( tag_full: { eq: $tag_full } ) {
-      tag_full
-      name
-      taggedImages {
-        image_path
-        image_name
-        image_caption
-        image_title
-        creationDate(formatString: "MMMM, DD YYYY")
-        full_image_path
-        tags {
-          name
-          tag_full
-        }
-        imageAlbums {
-          album_path
-        }
+query photoTagQuery($tag_full: String) {
+  allMysqlTags(sort: {tag_full: ASC}) {
+    distinct(field: {tag_full: SELECT})
+  }
+  mysqlTags(tag_full: {eq: $tag_full}) {
+    tag_full
+    name
+    taggedImages {
+      image_path
+      image_name
+      image_caption
+      image_title
+      creationDate(formatString: "MMMM, DD YYYY")
+      full_image_path
+      tags {
+        name
+        tag_full
+      }
+      imageAlbums {
+        album_path
       }
     }
-  }`
+  }
+}
+`

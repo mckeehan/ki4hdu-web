@@ -3,7 +3,6 @@ import { Link, graphql } from 'gatsby'
 import BasePage from '../components/basepage'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
-import Zoom from 'react-medium-image-zoom'
 import TagCard from '../components/tagcard'
 import { TrackCard, WaypointCard, GpxCard } from '../components/gpxComponents'
 import LeafletMap from '../components/leafletMap'
@@ -72,7 +71,7 @@ const MapPage = ({ pageContext, data, location }) => {
                              <div className="fw-bold">{data.markdownRemark.frontmatter.author.name}</div>
                              <div className="text-muted">{data.markdownRemark.frontmatter.date}</div>
                              {data.markdownRemark.tableOfContents && <div className="ms-3"><div className="toc" dangerouslySetInnerHTML={{ __html: data.markdownRemark.tableOfContents }}/><hr/></div>}
-                             {data.markdownRemark.frontmatter.tags && <div className="ms-3">{ data.markdownRemark.frontmatter.tags.map(node => ( <TagCard tag={node}/> )) }<hr/></div> }
+                             {data.markdownRemark.frontmatter.tags && data.markdownRemark.frontmatter.tags.length > 0 && <div className="ms-3">{ data.markdownRemark.frontmatter.tags.map(node => ( <TagCard tag={node}/> )) }<hr/></div> }
                          </div>
                      </div>
                      }
@@ -86,9 +85,7 @@ const MapPage = ({ pageContext, data, location }) => {
                          {data.markdownRemark && data.markdownRemark.frontmatter.featuredImage &&
                          <section className="w-50 float-md-end">
                              <figure className="figure">
-                                 <Zoom>
                                      <img className="img-fluid" src={data.markdownRemark.frontmatter.featuredImage} alt="" />
-                                 </Zoom>
                                  {data.markdownRemark.frontmatter.featuredImageCaption && <figcaption className="figure-caption" >{data.markdownRemark.frontmatter.featuredImageCaption}</figcaption>}
                              </figure>
                          </section>
@@ -105,7 +102,7 @@ const MapPage = ({ pageContext, data, location }) => {
                           if (nameA > nameB) { return 1; }
                           return 0;
                         }).map(waypoint => (
-                          <div className="card col-lg-4 col-md-6">
+                          <div className="waypointcard card col-lg-4 col-md-6">
                               <WaypointCard waypoint={waypoint}/>
                           </div>
                       ))}
@@ -116,17 +113,17 @@ const MapPage = ({ pageContext, data, location }) => {
                           if (nameA > nameB) { return 1; }
                           return 0;
                         }).map(track => (
-                          <div className="card col-lg-4 col-md-6">
+                          <div className="trackcard card col-lg-4 col-md-6">
                               <TrackCard track={track}/>
                           </div>
                         ))}
                         {children.length > 0 && children.map( gpxdir => (
-                          <div className="card col-lg-4 col-md-6">
+                          <div className="gpxchild card col-lg-4 col-md-6">
                               <GpxCard type="folder" link={`/maps${gpxdir}`} name={gpxdir.split('/').slice(-1)[0]}/>
                           </div>
                         ))}
                         {data.allGpXfile.edges && data.allGpXfile.edges.map(gpxNode => (
-                          <div className="card col-lg-4 col-md-6">
+                          <div className="gpxedge card col-lg-4 col-md-6">
                             <GpxCard type="file" name={gpxNode.node.name} link={`/maps${gpxNode.node.slug}`} />
                           </div>
                          ))}
@@ -140,8 +137,8 @@ const MapPage = ({ pageContext, data, location }) => {
 )}
 
 export const query = graphql`
-query gpXQuery( $slug: String ) {
- markdownRemark(fields: {slug: {eq: $slug}, collection: {eq: "gpx"}}) {
+query gpXQuery($slug: String) {
+  markdownRemark(fields: {slug: {eq: $slug}, collection: {eq: "gpxkml"}}) {
     fields {
       mydir
       slug
@@ -201,11 +198,11 @@ query gpXQuery( $slug: String ) {
     }
   }
   allDirectories: allGpXfile {
-    distinct(field: mydir)
+    distinct(field: {mydir: SELECT})
   }
   allGpXfile(
     filter: {mydir: {eq: $slug}}
-    sort: {fields: [properties___time, name], order: [DESC, ASC]}
+    sort: [{properties: {time: DESC}}, {name: ASC}]
   ) {
     edges {
       node {

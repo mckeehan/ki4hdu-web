@@ -3,10 +3,11 @@ import { Link } from 'gatsby'
 import avatar from "./wm-2012.jpg"
 
 const NoteCard = ({ note }) => {
-  const linkPath = note.fields.collection === "blog" ? "/blog" + note.fields.slug : note.fields.slug
+  const linkPath = note.fields.collection === "blog" ? "/blog" + note.fields.slug : 
+        note.fields.collection === "gpxkml" ? "/maps" + note.fields.slug : note.fields.slug
   return (
                         <div className="col-lg-4 mb-5">
-                            <div className="card h-100 shadow border-0">
+                            <div className="notecardcomponent card h-100 shadow border-0">
                                 {note.frontmatter.featuredImage && <img loading="lazy" className="card-img-top" src={note.frontmatter.featuredImage} alt="" />}
                                 <div className="card-body p-4">
                                     <div className="badge bg-primary bg-gradient rounded-pill mb-2">{note.fields.collection}</div>
