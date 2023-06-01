@@ -1,11 +1,13 @@
 import React from "react"
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import BasePage from '../components/basepage'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import TagCard from '../components/tagcard'
 import { TrackCard, WaypointCard, GpxCard } from '../components/gpxComponents'
 import LeafletMap from '../components/leafletMap'
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 
 function arrayContains(arr, v) {
   for (var i = 0; i < arr.length; i++) {
@@ -76,7 +78,7 @@ const MapPage = ({ pageContext, data, location }) => {
                      </div>
                      }
                      {data.gpXfile &&
-                     <Link to={`/gpx/${data.gpXfile.relativePath}`}>Download</Link>
+                     <span> Download <a href={`/gpx/${data.gpXfile.relativePath}`}>{`${data.gpXfile.name}.gpx`}</a></span>
                      }
                  </div>
                  <div className="col-lg-9">
@@ -85,7 +87,9 @@ const MapPage = ({ pageContext, data, location }) => {
                          {data.markdownRemark && data.markdownRemark.frontmatter.featuredImage &&
                          <section className="w-50 float-md-end">
                              <figure className="figure">
+                                     <Zoom>
                                      <img className="img-fluid" src={data.markdownRemark.frontmatter.featuredImage} alt="" />
+                                     </Zoom>
                                  {data.markdownRemark.frontmatter.featuredImageCaption && <figcaption className="figure-caption" >{data.markdownRemark.frontmatter.featuredImageCaption}</figcaption>}
                              </figure>
                          </section>
@@ -166,6 +170,7 @@ query gpXQuery($slug: String) {
     slug
     name
     mydir
+    relativePath
     properties {
       desc
     }

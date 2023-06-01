@@ -4,6 +4,7 @@ import HomePage from '../components/homepage'
 import Headshot from '../../static/wm-2012-600x400.png'
 import BlogCard from '../components/blogcard'
 import { FaTwitter, } from 'react-icons/fa'
+import Search from '../components/search'
 
 const IndexPage = ({ pageContext, data, location }) => {
   const nextPage = "/blog/p/2"
@@ -32,6 +33,9 @@ const IndexPage = ({ pageContext, data, location }) => {
                     </div>
                 </div>
             </header>
+            <div className="container my-1">
+              <Search size="medium" showExcerpt={true} />
+            </div>
             <section className="bg-light py-1">
                 <div className="container px-5 my-5">
                     <div className="text-center mb-5">

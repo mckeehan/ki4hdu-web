@@ -4,6 +4,8 @@ import TagCard from '../components/tagcard'
 import NoteLink from '../components/notelink'
 import GalleryCard from '../components/gallerycard'
 import { Link, graphql } from 'gatsby'
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 
 //import 'react-medium-image-zoom/dist/styles.css'
 
@@ -35,7 +37,9 @@ const BlogPost = ({ pageContext, data, location}) => {
                                 {data.markdownRemark.frontmatter.featuredImage &&
                                     <section className="w-50 float-md-end no-print">
                                       <figure className="figure">
-                                          <img className="img-fluid" src={data.markdownRemark.frontmatter.featuredImage} alt="" />
+                                          <Zoom>
+                                            <img className="img-fluid" src={data.markdownRemark.frontmatter.featuredImage} alt="" />
+                                          </Zoom>
                                         {data.markdownRemark.frontmatter.featuredImageCaption && <figcaption className="figure-caption" >{data.markdownRemark.frontmatter.featuredImageCaption}</figcaption>}
                                       </figure>
                                     </section>
