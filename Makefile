@@ -13,6 +13,6 @@ clean:
 	rm -f build
 
 publish: build
-	rsync -av public/ /Library/WebServer/ki4hdu.com
+	rsync -av --delete public/ /Library/WebServer/ki4hdu.com
 
 #593  gatsby clean && gatsby build
