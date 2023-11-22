@@ -32,8 +32,8 @@ form .search-result ul {
 .search-result p {
   padding-left: 1rem;
   border-left: 1px solid #FAFAFC;
-  margin-left: .5rem;
   font-size: small;
+  display: block;
 }
 
 .is-medium.input, .is-medium.textarea {
