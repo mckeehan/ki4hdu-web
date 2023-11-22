@@ -56,6 +56,18 @@ const IndexPage = ({ pageContext, data, location }) => {
                         </div>
                         <div className="col-lg-6">
                             <div className="position-relative mb-5 text-center">
+                                <img loading="lazy" className="img-fluid rounded-3 mb-3" src="https://ki4hdu.com/pics/thumbnails/Motorcycle/2013-10-20%20Over%20the%20Mountains%20to%20the%20Blue%20Ridge/DSC_3724-1024x768.JPG" alt="Smoky Mountain Fall" />
+                                <Link className="h3 fw-bolder text-decoration-none link-dark stretched-link" to="/photos">Photos</Link>
+                            </div>
+                        </div>
+                        <div className="col-lg-6">
+                            <div className="position-relative mb-5 text-center">
+                                <img loading="lazy" className="img-fluid rounded-3 mb-3" src="https://ki4hdu.com/_resources/gaiascreenshot.png" alt="maps" />
+                                <Link className="h3 fw-bolder text-decoration-none link-dark stretched-link" to="/maps">Maps</Link>
+                            </div>
+                        </div>
+                        <div className="col-lg-6">
+                            <div className="position-relative mb-5 text-center">
                                 <img loading="lazy" className="img-fluid rounded-3 mb-3" src="https://ki4hdu.com/_resources/todo.jpg" alt="todo" />
                                 <Link className="h3 fw-bolder text-decoration-none link-dark stretched-link" to="productivity">Productivity</Link>
                             </div>
