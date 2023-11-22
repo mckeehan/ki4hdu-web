@@ -109,6 +109,37 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
+  const photoPageQuery = await graphql(`{
+  allMysqlImages {
+    nodes {
+      image_id
+      image_title
+      image_name
+    }
+  }
+}`)
+
+  if (photoPageQuery.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    return
+  }
+
+  // Create photo  pages
+  photoPageQuery.data.allMysqlImages.nodes.forEach( node => {
+    createPage({
+      path: '/photos/photo-' + node.image_id,
+      component: path.resolve(`./src/templates/photopage.js`),
+      context: {
+        slug: '/photos/photo-' + node.image_id,
+        imageId: node.image_id,
+        pageTitle: node.image_title,
+        image_title: node.image_title,
+        image_name: node.image_name,
+      },
+    })
+  })
+
+
   //get all phototag pages
   let phototagPages = []
   const phototagPageQuery = await graphql(`{
@@ -163,7 +194,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   let gpxpages = []
   const gpxmarkdown = await graphql(`{
         allMarkdownRemark(
-          filter: { fields: { collection: { eq: "gpx" } } }
+          filter: { fields: { collection: { eq: "gpxkml" } } }
           limit: 1000
         ) {
           edges {

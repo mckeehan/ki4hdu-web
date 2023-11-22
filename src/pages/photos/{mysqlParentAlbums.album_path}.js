@@ -55,6 +55,7 @@ export const query = graphql`
           album_image_path
         }
         images {
+          image_id
           image_path
           image_name
           image_caption
