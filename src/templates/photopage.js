@@ -3,8 +3,11 @@ import { graphql, Link } from 'gatsby'
 import BasePage from '../components/basepage'
 import Zoom from 'react-medium-image-zoom'
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { FullscreenControl } from "react-leaflet-fullscreen";
 import _ from 'lodash'
 import TagCard from '../components/tagcard'
+
+import 'react-leaflet-fullscreen/styles.css'
 
 const PhotoPage = ({ pageContext, data, location}) => {
   const image = data.mysqlImages
@@ -18,16 +21,17 @@ const PhotoPage = ({ pageContext, data, location}) => {
         <div className="container px-3">
             <h2 className="fw-bolder fs-5 mb-4">{pageTitle}</h2>
             <div className="position-relative mb-5 mx-0 text-center">
-                <Zoom><img className="img-flex" src={image.full_image_path}  alt={image.image_title} /></Zoom>
+                <Zoom><img className="img-fluid" src={image.full_image_path}  alt={image.image_title} /></Zoom>
             </div>
             {image.image_caption && <div className="position-relative mb-5">{image.image_caption}</div>}
             <div className="row">
               <div className="col-lg-6">
-              { image.latitudeNumber && <MapContainer zoom='16' center={position}>
+              { image.latitudeNumber && <MapContainer zoom='16' center={position} id="map">
                   <TileLayer
                     url="https://api.maptiler.com/maps/topo/{z}/{x}/{y}.png?key=yoMjNkrKO1TYRL38x7Qu"
                     attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
                   />
+                  <FullscreenControl position="topright" forceSeparateButton="true" />
                   <Marker position={position}>
                   </Marker>
                 </MapContainer>}

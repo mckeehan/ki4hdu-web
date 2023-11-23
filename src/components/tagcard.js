@@ -5,7 +5,7 @@ import { FaTag } from 'react-icons/fa'
 const TagCard = ({ tag }) => {
   const tagUrl = "/tags/" + tag
   return (
-     <div>
+     <div key={tag}>
       <Link to={tagUrl}>
         <FaTag/>&nbsp;
         {tag}
