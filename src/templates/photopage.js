@@ -5,7 +5,7 @@ import Zoom from 'react-medium-image-zoom'
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { FullscreenControl } from "react-leaflet-fullscreen";
 import _ from 'lodash'
-import TagCard from '../components/tagcard'
+import { FaTag } from 'react-icons/fa'
 
 import 'react-leaflet-fullscreen/styles.css'
 
@@ -47,7 +47,13 @@ const PhotoPage = ({ pageContext, data, location}) => {
 			            Exposure Time: {image.exposureTime} <br/>
 			            ISO: {image.sensitivity} <br/>
 			            MeteringMode: {image.meteringMode} <br/>
-                  {image.tags && image.tags.length > 0 && <div className="ms-3">{ image.tags.map(node => ( <TagCard tag={node.name}/> )) }</div>}
+                  {image.tags && image.tags.length > 0 && <div className="ms-3">{image.tags.map( tag => {
+                      const slug = "/phototags" + tag.tag_full.split('/').map( e => _.kebabCase(e) ).join('/');
+                      return (
+                          <span className="col-md-6"><Link to={slug}><FaTag/>&nbsp;{tag.name}</Link></span>
+                          )
+                      })}
+                  </div>}
 		          </div>
           </div>
         </div>

@@ -83,12 +83,14 @@ query photoTagQuery($tag_full: String) {
     tag_full
     name
     taggedImages {
+      image_id
       image_path
       image_name
       image_caption
       image_title
       creationDate(formatString: "MMMM, DD YYYY")
       full_image_path
+      album_path
       tags {
         name
         tag_full
