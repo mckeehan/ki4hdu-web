@@ -6,8 +6,8 @@ import _ from 'lodash'
 import { FaTag } from 'react-icons/fa'
 
 const ImageCard = ({ image }) => {
-  const albumslug = image.album_path.replace(/[|&;$%@"<>()+,]/g, "").replaceAll(/ /g, '-').toLowerCase()
-  const detailLink = "/photos" + albumslug + "/photo-" + image.image_id
+  const albumslug = image.album_path ? image.album_path.replace(/[|&;$%@"<>()+,]/g, "").replaceAll(/ /g, '-').toLowerCase() : undefined
+  const detailLink = albumslug ? "/photos" + albumslug + "/photo-" + image.image_id : undefined
   return (
                         <div className="col-lg-4 mb-5">
                             <div className="imagecardcomponent card h-100 shadow border-0">
@@ -34,7 +34,7 @@ const ImageCard = ({ image }) => {
                                     </div>}
                                     <div className="small">
                                         <div className="text-muted">{image.creationDate}</div>
-                                        <div className="text-muted"><Link to={detailLink}>details</Link></div>
+                                        {detailLink && <div className="text-muted"><Link to={detailLink}>details</Link></div>}
                                     </div>
                                 </div>
                             </div>
