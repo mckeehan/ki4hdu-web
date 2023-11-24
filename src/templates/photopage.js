@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql, Link } from 'gatsby'
 import BasePage from '../components/basepage'
-import Zoom from 'react-medium-image-zoom'
+// import Zoom from 'react-medium-image-zoom'
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { FullscreenControl } from "react-leaflet-fullscreen";
 import _ from 'lodash'
@@ -21,7 +21,7 @@ const PhotoPage = ({ pageContext, data, location}) => {
         <div className="container px-3">
             <h2 className="fw-bolder fs-5 mb-4">{pageTitle}</h2>
             <div className="position-relative mb-5 mx-0 text-center">
-                <Zoom><img className="img-fluid" src={image.full_image_path}  alt={image.image_title} /></Zoom>
+                <img loading="lazy" className="img-fluid" src={image.full_image_path}  alt={image.image_title} />
             </div>
             {image.image_caption && <div className="position-relative mb-5">{image.image_caption}</div>}
             <div className="row">
@@ -38,15 +38,15 @@ const PhotoPage = ({ pageContext, data, location}) => {
               </div>
 		          <div id='image-metadata' className="col-lg-6">
                   Album: <Link to={albumSlug}>{albumTitle}</Link><br/>
-			            Creation Date: <span itemProp='dateCreated'>{image.creationDate}</span><br/>
-			            Modification Date: <span itemProp='dateModified'>{image.modificationDate}</span><br/>
-			            Camera: {image.make} / {image.model} <br/>
-			            Lens: {image.lens} <br/>
-			            Aperture: f/{image.aperture} <br/>
-			            Focal Length: {image.focalLength} mm<br/>
-			            Exposure Time: {image.exposureTime} <br/>
-			            ISO: {image.sensitivity} <br/>
-			            MeteringMode: {image.meteringMode} <br/>
+			            {image.creationDate && <span>Creation Date: <span itemProp='dateCreated'>{image.creationDate}</span><br/></span>}
+			            {image.modificationDate && image.modificationDate !== image.creationDate && <span>Modification Date: <span itemProp='dateModified'>{image.modificationDate}</span><br/></span>}
+			            {image.make && <span>Camera: {image.make} / {image.model} <br/></span>}
+			            {image.lens && <span>Lens: {image.lens} <br/></span>}
+			            {image.aperture && <span>Aperture: f/{image.aperture} <br/></span>}
+			            {image.focalLength && <span>Focal Length: {image.focalLength} mm<br/></span>}
+			            {image.exposureTime && <span>Exposure Time: {image.exposureTime} <br/></span>}
+			            {image.sensitivity && <span>ISO: {image.sensitivity} <br/></span>}
+			            {image.meteringMode && <span>MeteringMode: {image.meteringMode} <br/></span>}
                   {image.tags && image.tags.length > 0 && <div className="ms-3">{image.tags.map( tag => {
                       const slug = "/phototags" + tag.tag_full.split('/').map( e => _.kebabCase(e) ).join('/');
                       return (
