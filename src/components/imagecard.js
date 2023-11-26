@@ -1,9 +1,8 @@
 import * as React from 'react'
+import _ from 'lodash'
 import { Link } from "gatsby"
 import ReactMarkdown from 'react-markdown'
-//import 'react-medium-image-zoom/dist/styles.css'
-import _ from 'lodash'
-import { FaTag } from 'react-icons/fa'
+import PhotoTagList from '../components/phototaglist'
 
 const ImageCard = ({ image }) => {
   const albumslug = image.album_path ? image.album_path.replace(/[|&;$%@"<>()+,]/g, "").replaceAll(/ /g, '-').toLowerCase() : undefined
@@ -24,14 +23,7 @@ const ImageCard = ({ image }) => {
                                         </div>
                                       )
                                     })}
-                                    {image.tags && image.tags.length > 0 && <div className="small row">
-                                        {image.tags.map( tag => {
-                                          const slug = "/phototags" + tag.tag_full.split('/').map( e => _.kebabCase(e) ).join('/');
-                                          return (
-                                            <span className="col-md-6"><Link to={slug}><FaTag/>&nbsp;{tag.name}</Link></span>
-                                          )
-                                        })}
-                                    </div>}
+                                    {image.tags && image.tags.length > 0 && <PhotoTagList tags={image.tags}/>}
                                     <div className="small">
                                         <div className="text-muted">{image.creationDate}</div>
                                         {detailLink && <div className="text-muted"><Link to={detailLink}>details</Link></div>}

@@ -1,12 +1,11 @@
 import * as React from 'react'
-import { graphql, Link } from 'gatsby'
+import _ from 'lodash'
 import BasePage from '../components/basepage'
-// import Zoom from 'react-medium-image-zoom'
+import { graphql, Link } from 'gatsby'
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { FullscreenControl } from "react-leaflet-fullscreen";
-import _ from 'lodash'
-import { FaTag } from 'react-icons/fa'
 import SimpleReactLightbox, { SRLWrapper } from "simple-react-lightbox"
+import PhotoTagList from '../components/phototaglist'
 
 import 'react-leaflet-fullscreen/styles.css'
 
@@ -51,13 +50,7 @@ const PhotoPage = ({ pageContext, data, location}) => {
 			            {image.exposureTime && <span>Exposure Time: {image.exposureTime} <br/></span>}
 			            {image.sensitivity && <span>ISO: {image.sensitivity} <br/></span>}
 			            {image.meteringMode && <span>MeteringMode: {image.meteringMode} <br/></span>}
-                  {image.tags && image.tags.length > 0 && <div className="ms-3">{image.tags.map( tag => {
-                      const slug = "/phototags" + tag.tag_full.split('/').map( e => _.kebabCase(e) ).join('/');
-                      return (
-                          <span id={tag.name} className="col-md-6"><Link to={slug}><FaTag/>&nbsp;{tag.name}</Link></span>
-                          )
-                      })}
-                  </div>}
+                  {image.tags && image.tags.length > 0 && <PhotoTagList tags={image.tags}/>}
 		          </div>
           </div>
         </div>

@@ -321,7 +321,7 @@ const TrackCard = ({ track }) => {
   const stroke = track.properties.stroke || '8B0000';
   const strokeColor = `#${stroke}`
   return (
-      <div className="row g-2 align-items-center" >
+      <div key={track.properties.name} className="row g-2 align-items-center" >
             <div className="col-md-2 g-3" style={{backgroundColor: strokeColor}}>
               &nbsp;
             </div>
@@ -338,7 +338,7 @@ const WaypointCard = ({ waypoint }) => {
   const image = symbol && symbol.options && symbol.options.iconUrl;
   const elevation = JSON.stringify(waypoint.geometry.coordinates.length === 3 ? waypoint.geometry.coordinates[2] : undefined); 
   return (
-      <div className="row g-2 align-items-center">
+      <div key={waypoint.properties.name} className="row g-2 align-items-center">
           <div className="col-md-2">
               <img loading="lazy" width="24" src={image} alt={waypoint.properties.sym}/>
           </div>
