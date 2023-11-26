@@ -6,6 +6,7 @@ import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import { FullscreenControl } from "react-leaflet-fullscreen";
 import _ from 'lodash'
 import { FaTag } from 'react-icons/fa'
+import SimpleReactLightbox, { SRLWrapper } from "simple-react-lightbox"
 
 import 'react-leaflet-fullscreen/styles.css'
 
@@ -16,13 +17,16 @@ const PhotoPage = ({ pageContext, data, location}) => {
   const albumSlug = "/photos" + image.album_path.split('/').map( e => _.kebabCase(e) ).join('/');
   const albumTitle = image.album_path.replace(/^.*\/(.*)/, "$1").replace(/^....-..-.. /, "")
   return (
+<SimpleReactLightbox>
 <BasePage pageContext={pageContext} pageTitle={pageTitle} location={location} description={image.caption} >
     <section className="py-5">
         <div className="container px-3">
             <h2 className="fw-bolder fs-5 mb-4">{pageTitle}</h2>
-            <div className="position-relative mb-5 mx-0 text-center">
+            <SRLWrapper>
+              <div className="position-relative mb-5 mx-0 text-center">
                 <img loading="lazy" className="img-fluid" src={image.full_image_path}  alt={image.image_title} />
-            </div>
+              </div>
+            </SRLWrapper>
             {image.image_caption && <div className="position-relative mb-5">{image.image_caption}</div>}
             <div className="row">
               <div className="col-lg-6">
@@ -50,7 +54,7 @@ const PhotoPage = ({ pageContext, data, location}) => {
                   {image.tags && image.tags.length > 0 && <div className="ms-3">{image.tags.map( tag => {
                       const slug = "/phototags" + tag.tag_full.split('/').map( e => _.kebabCase(e) ).join('/');
                       return (
-                          <span className="col-md-6"><Link to={slug}><FaTag/>&nbsp;{tag.name}</Link></span>
+                          <span id={tag.name} className="col-md-6"><Link to={slug}><FaTag/>&nbsp;{tag.name}</Link></span>
                           )
                       })}
                   </div>}
@@ -59,6 +63,7 @@ const PhotoPage = ({ pageContext, data, location}) => {
         </div>
     </section>
 </BasePage>
+</SimpleReactLightbox>
   )
 }
 
