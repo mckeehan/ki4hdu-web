@@ -2,7 +2,7 @@
 all: build
 
 build:
-	gatsby build
+	gatsby build --verbose
 	touch build
 
 develop: clean
