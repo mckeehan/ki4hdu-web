@@ -31,7 +31,7 @@ const PhotoPage = ({ pageContext, data, location}) => {
               <div className="col-lg-6">
               { image.latitudeNumber && <MapContainer zoom='16' center={position} id="map">
                   <TileLayer
-                    url="https://api.maptiler.com/maps/topo/{z}/{x}/{y}.png?key=yoMjNkrKO1TYRL38x7Qu"
+                    url="https://api.maptiler.com/maps/topo-v2/{z}/{x}/{y}.png?key=yoMjNkrKO1TYRL38x7Qu"
                     attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
                   />
                   <FullscreenControl position="topright" forceSeparateButton="true" />

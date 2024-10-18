@@ -1,10 +1,11 @@
-node_modules/
-.cache/
-public
-notes
+/node_modules/
+/.cache/
+/public
+/notes
 gpx
-blog
-gatsby-config.js
+/blog
+/gatsby-config.js
 build
 build.log
 Obsidian
+/photos

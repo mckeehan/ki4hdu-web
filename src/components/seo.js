@@ -28,6 +28,7 @@ const Head = ({ title, description, image, article }) => {
     <>
       <html lang="en" />
       <title>{seo.title}</title>
+      {img && <meta name="robots" content="max-image-preview:large"/>}
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
 

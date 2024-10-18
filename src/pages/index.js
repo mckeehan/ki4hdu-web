@@ -7,7 +7,7 @@ import { FaTwitter, } from 'react-icons/fa'
 import Search from '../components/search'
 
 const IndexPage = ({ pageContext, data, location }) => {
-  const nextPage = "/blog/p/2"
+  const nextPage = "/blog/"
   return (
     <HomePage pageContext={pageContext} pageTitle="Home" location={location} >
             <header className="bg-dark">
@@ -21,11 +21,11 @@ const IndexPage = ({ pageContext, data, location }) => {
                                     This is my personal website. In it I have placed information about my interest and hobbies that others may find interesting.
                                 </p>
                                 <p className="text-center">
-                                    <div>
-                                        <a id="follow-button" className="rounded-pill p-2 twitter-button text-white text-decoration-none" title="Follow @mckeehan on Twitter" href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.ki4hdu.com%2F&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Emckeehan&amp;region=follow_link&amp;screen_name=mckeehan">
-                                          <span className="text-light"><FaTwitter/> Follow <b>@mckeehan</b></span>
-                                        </a>
-                                    </div>
+                                   <div>
+                                       <a id="follow-button" className="rounded-pill p-2 twitter-button text-white text-decoration-none" title="Follow @mckeehan on Twitter" href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.ki4hdu.com%2F&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Emckeehan&amp;region=follow_link&amp;screen_name=mckeehan">
+                                         <span className="text-light"><FaTwitter/> Follow <b>@mckeehan</b></span>
+                                       </a>
+                                   </div>
                                 </p>
                             </div>
                         </div>
@@ -105,6 +105,29 @@ const IndexPage = ({ pageContext, data, location }) => {
                         </Link>
                     </div>
                 </div>
+            </section>
+            <section className="py-3">
+              <h2>Other areas of interest</h2>
+              <div className="row gx-5">
+                <Link className="col-lg-4 col-sm-6 border rounded-3 text-decoration-none link-dark" to="/martial-arts">
+                  <div className="row no-gutters">
+                    <div className="col-sm-7">
+                      <div className="card-body">
+                        <div className="h5 card-title mb-3">Martial Arts</div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+                <Link className="col-lg-4 col-sm-6 border rounded-3 text-decoration-none link-dark" to="/computers">
+                  <div className="row no-gutters">
+                    <div className="col-sm-7">
+                      <div className="card-body">
+                        <div className="h5 card-title mb-3">Computer Stuff</div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
             </section>
         </HomePage>
   )

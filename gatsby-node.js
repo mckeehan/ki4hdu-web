@@ -97,7 +97,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   }
 
   if (node.internal.type === `MysqlAlbums` || node.internal.type === 'MysqlParentAlbums') {
-    const slug = node.album_path.replace(/[|&;$%@"<>()+,]/g, "").replaceAll(/ /g, '-').toLowerCase()
+    const slug = node.album_path.replaceAll(/'/g,"-").replace(/[|&;$%@"<>()+,]/g, "").replaceAll(/ /g, '-').toLowerCase()
     createNodeField({
       node,
       name: `slug`,
@@ -400,7 +400,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // Create photo  pages
   photoPageQuery.data.allMysqlImages.nodes.forEach( node => {
-    const albumslug = node.album_path.replace(/[|&;$%@"<>()+,]/g, "").replaceAll(/ /g, '-').toLowerCase()
+    const albumslug = node.album_path.replaceAll(/'/g,"-").replace(/[|&;$%@"<>()+,]/g, "").replaceAll(/ /g, '-').toLowerCase()
     createPage({
       path: '/photos' + albumslug + '/photo-' + node.image_id,
       component: path.resolve(`./src/templates/photopage.js`),

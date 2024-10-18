@@ -10,7 +10,7 @@ import SimpleReactLightbox, { SRLWrapper } from "simple-react-lightbox"
 
 
 const PhotoAlbum = ({ pageContext, data, location }) => {
-  const pageTitle = data.mysqlParentAlbums.album_path.replace(/^.*\/(.*)/, "$1").replace(/^....-..-.. /, "")
+  const pageTitle = data.mysqlParentAlbums.album_path.replaceAll(/'/g,"-").replace(/^.*\/(.*)/, "$1").replace(/^....-..-.. /, "")
   return (
       <SimpleReactLightbox>
 <BasePage pageContext={pageContext} pageTitle={pageTitle} location={location} image={data.mysqlParentAlbums.album_image_path.replace(/ /g, "%20")} description={data.mysqlParentAlbums.album_caption}>
