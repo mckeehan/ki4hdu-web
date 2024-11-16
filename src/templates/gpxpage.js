@@ -73,7 +73,7 @@ const MapPage = ({ pageContext, data, location }) => {
                              <div className="fw-bold">{data.markdownRemark.frontmatter.author.name}</div>
                              <div className="text-muted">{data.markdownRemark.frontmatter.date}</div>
                              {data.markdownRemark.tableOfContents && <div className="ms-3"><div className="toc" dangerouslySetInnerHTML={{ __html: data.markdownRemark.tableOfContents }}/><hr/></div>}
-                             {data.markdownRemark.frontmatter.tags && data.markdownRemark.frontmatter.tags.length > 0 && <div className="ms-3">{ data.markdownRemark.frontmatter.tags.map(node => ( <TagCard tag={node}/> )) }<hr/></div> }
+                             {data.markdownRemark.frontmatter.tags && data.markdownRemark.frontmatter.tags.length > 0 && <div className="ms-3">{ data.markdownRemark.frontmatter.tags.map(node => ( <TagCard tag={node} keyPrefix="mappagetags" /> )) }<hr/></div> }
                          </div>
                      </div>
                      }
@@ -106,7 +106,7 @@ const MapPage = ({ pageContext, data, location }) => {
                           if (nameA > nameB) { return 1; }
                           return 0;
                         }).map(waypoint => (
-                          <div className="waypointcard card col-lg-4 col-md-6">
+                          <div className="waypointcard card col-lg-4 col-md-6" key="waypointcard-wrappepr-{waypoint.properties.name}" >
                               <WaypointCard waypoint={waypoint}/>
                           </div>
                       ))}
@@ -117,17 +117,17 @@ const MapPage = ({ pageContext, data, location }) => {
                           if (nameA > nameB) { return 1; }
                           return 0;
                         }).map(track => (
-                          <div className="trackcard card col-lg-4 col-md-6">
+                          <div className="trackcard card col-lg-4 col-md-6" key="trackcard-wrapper{track.properties.name}">
                               <TrackCard track={track}/>
                           </div>
                         ))}
                         {children.length > 0 && children.map( gpxdir => (
-                          <div className="gpxchild card col-lg-4 col-md-6">
+                          <div className="gpxchild card col-lg-4 col-md-6" key="gpxchildcard-wrapper-{gpxdir.split('/').slice(-1)[0]}">
                               <GpxCard type="folder" link={`/maps${gpxdir}`} name={gpxdir.split('/').slice(-1)[0]}/>
                           </div>
                         ))}
                         {data.allGpXfile.edges && data.allGpXfile.edges.map(gpxNode => (
-                          <div className="gpxedge card col-lg-4 col-md-6">
+                          <div className="gpxedge card col-lg-4 col-md-6" key="gpxedge-wrapper-{gpxNode.node.name}">
                             <GpxCard type="file" name={gpxNode.node.name} link={`/maps${gpxNode.node.slug}`} />
                           </div>
                          ))}

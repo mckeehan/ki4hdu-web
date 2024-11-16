@@ -14,18 +14,18 @@ const BlogHome = ({ pageContext, data, location }) => {
                 <div className="container px-5">
                     <h2 className="fw-bolder fs-5 mb-4">Blog Entries{!isFirst && ( <span>page {currentPage}</span>)}</h2>
                     {isFirst && (
-                    <div className="py-3">
+                    <div className="py-3" key="some random thoughts">
                         Some of my random thoughts...
                     </div>
                     )}
-                    <div className="row gx-5">
+                    <div className="row gx-5" key="cardcontainer">
                         {
                             data.allMarkdownRemark.nodes.map(node => (
-                                <BlogCard blog={node}/>
+                                <BlogCard blog={node} key={node.fields.slug}/>
                             ))
                         }
                     </div>
-                    <div className="text-end mb-5 mb-xl-0">
+                    <div className="text-end mb-5 mb-xl-0" key="pagination">
                         {!isLast && (
                           <Link className="text-decoration-none" to={nextPage}>
                             Older entries

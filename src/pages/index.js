@@ -107,26 +107,28 @@ const IndexPage = ({ pageContext, data, location }) => {
                 </div>
             </section>
             <section className="py-3">
-              <h2>Other areas of interest</h2>
-              <div className="row gx-5">
-                <Link className="col-lg-4 col-sm-6 border rounded-3 text-decoration-none link-dark" to="/martial-arts">
-                  <div className="row no-gutters">
-                    <div className="col-sm-7">
-                      <div className="card-body">
-                        <div className="h5 card-title mb-3">Martial Arts</div>
+              <div className="container px-5 my-5">
+                <h2>Other areas of interest</h2>
+                <div className="row gx-5 align-items-center justify-content-center">
+                  <Link className="col-lg-4 col-sm-6 border rounded-3 text-decoration-none link-dark" to="/martial-arts">
+                    <div className="row no-gutters">
+                      <div className="col-sm-7">
+                        <div className="card-body">
+                          <div className="h5 card-title mb-3">Martial Arts</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
-                <Link className="col-lg-4 col-sm-6 border rounded-3 text-decoration-none link-dark" to="/computers">
-                  <div className="row no-gutters">
-                    <div className="col-sm-7">
-                      <div className="card-body">
-                        <div className="h5 card-title mb-3">Computer Stuff</div>
+                  </Link>
+                  <Link className="col-lg-4 col-sm-6 border rounded-3 text-decoration-none link-dark" to="/computers">
+                    <div className="row no-gutters">
+                      <div className="col-sm-7">
+                        <div className="card-body">
+                          <div className="h5 card-title mb-3">Computer Stuff</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               </div>
             </section>
         </HomePage>

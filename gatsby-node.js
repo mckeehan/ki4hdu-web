@@ -210,6 +210,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 
   gpxDirs.data.allGpxDirs.distinct.explode('/').unique().filter( n => n ).filter( p => !gpxpages.includes(p)).forEach( gpxdir => {
+    reporter.verbose('Creating /maps' + gpxdir)
     createPage({
       path: '/maps' + gpxdir,
       component: path.resolve(`./src/templates/gpxpage.js`),

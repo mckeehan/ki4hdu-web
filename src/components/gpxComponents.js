@@ -351,8 +351,9 @@ const WaypointCard = ({ waypoint }) => {
 )}
 
 const GpxCard = ({ name, link, type }) => {
+  const key = "gpx" + name
   return (
-            <div className="card-body">
+            <div className="card-body" key={key} >
                 <Link className="text-decoration-none link-dark stretched-link" to={link}>
                   { type === "tag" && <FaTag/> }
                   { type === "file" && <FaFile/> }
@@ -374,7 +375,7 @@ const WaypointMarker = ({ waypoint }) => {
     )
 }
 
-const TrackLine = ({track}) => {
+const TrackLine = ({track }) => {
     const stroke = track.properties.stroke || '8B0000';
     const strokeColor = `#${stroke}`
     return (

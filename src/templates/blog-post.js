@@ -51,8 +51,8 @@ const BlogPost = ({ pageContext, data, location}) => {
                                     <h2>Notes related to {data.markdownRemark.frontmatter.title}:</h2>
                                     <div className="row gx-5">
                                     {
-                                      relatedNotes.map(node => (
-                                        <NoteLink note={node}/>
+                                      relatedNotes.map(note => (
+                                        <NoteLink note={note}  key={note.fields.slug}/>
                                       ))
                                     }
                                     </div>

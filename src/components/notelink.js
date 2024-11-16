@@ -3,8 +3,8 @@ import { Link } from 'gatsby'
 
 const NoteLink = ({ note }) => {
   return (
-          <Link className="col-lg-4 col-sm-6 border rounded-3 text-decoration-none link-dark" to={note.fields.slug}>
-            <div className="row no-gutters">
+          <Link className="col-lg-4 col-sm-6 border rounded-3 text-decoration-none link-dark" to={note.fields.slug} key={note.fields.slug}>
+            <div className="row no-gutters" key={note.fields.slug}>
                 {note.frontmatter.featuredImage &&
                   <div className="col-sm-5 py-3">
                     <img loading="lazy" className="card-img-top" src={note.frontmatter.featuredImage} alt=""/>

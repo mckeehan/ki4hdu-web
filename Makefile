@@ -6,7 +6,7 @@ build:
 	touch build
 
 develop: clean
-	gatsby develop --host=0.0.0.0 
+	gatsby develop --verbose --host=0.0.0.0 
 
 clean:
 	gatsby clean

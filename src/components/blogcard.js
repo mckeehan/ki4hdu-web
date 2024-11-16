@@ -2,8 +2,9 @@ import * as React from 'react'
 import { Link } from 'gatsby'
 
 const BlogCard = ({ blog }) => {
+  const key = "blogcard" + blog.fields.slug
   return (
-                        <div className="col-lg-4 mb-5">
+                        <div className="col-lg-4 mb-5" key={key}>
                             <div className="blogcardcomponent card h-100 shadow border-0">
                                 {blog.frontmatter.featuredImage && <img loading="lazy" className="card-img-top" src={blog.frontmatter.featuredImage} alt="" />}
                                 <div className="card-body p-4">
