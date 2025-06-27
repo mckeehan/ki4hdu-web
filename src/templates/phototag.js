@@ -52,7 +52,7 @@ const TagsPage = ({ pageContext, data, location }) => {
                             const slug = child.split('/').map( e => _.kebabCase(e) ).join('/');
                             const pageTitle = child.split('/').slice(-1)[0].replace(/_/g, ' ')
                             return (
-                                <div className="tagCard card col-lg-4 col-md-6">
+                                <div className="tagCard card col-lg-4 col-md-6" key={`/phototags${slug}`}>
                                   <GpxCard type="tag" link={`/phototags${slug}`} name={pageTitle}/>
                                 </div>
                             )

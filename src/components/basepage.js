@@ -4,6 +4,7 @@ import Seo from '../components/seo.js';
 import SiteNavigation from './siteNavigation.js'
 import Footer from './footer.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'prismjs/themes/prism-solarizedlight.css'
 import "./basepage.css"
 
 const BasePage = ({ pageContext, pageTitle, location, image, description, children }) => {
@@ -30,3 +31,6 @@ const BasePage = ({ pageContext, pageTitle, location, image, description, childr
 
 export default BasePage
 
+export const Head = () => (
+  <Seo />
+  )

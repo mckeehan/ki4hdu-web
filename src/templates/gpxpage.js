@@ -85,14 +85,14 @@ const MapPage = ({ pageContext, data, location }) => {
                      {!data.markdownRemark && <h1>{pageTitle}</h1>}
                      <article className="clearfix">
                          {data.markdownRemark && data.markdownRemark.frontmatter.featuredImage &&
-                         <section className="w-50 float-md-end">
+                         <div className="w-50 float-md-end">
                              <figure className="figure">
                                      <Zoom>
                                      <img className="img-fluid" src={data.markdownRemark.frontmatter.featuredImage} alt="" />
                                      </Zoom>
                                  {data.markdownRemark.frontmatter.featuredImageCaption && <figcaption className="figure-caption" >{data.markdownRemark.frontmatter.featuredImageCaption}</figcaption>}
                              </figure>
-                         </section>
+                         </div>
                          }
                          {data.markdownRemark && <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}/>}
                          {data.gpXfile && data.gpXfile.properties && data.gpXfile.properties.desc && <ReactMarkdown rehypePlugins={[rehypeRaw]}>{data.gpXfile.properties.desc}</ReactMarkdown>}

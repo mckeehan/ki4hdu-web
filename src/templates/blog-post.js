@@ -27,7 +27,7 @@ const BlogPost = ({ pageContext, data, location}) => {
                                     }
                                     <div className="text-muted">{data.markdownRemark.frontmatter.date}</div>
                                     {data.markdownRemark.tableOfContents && <div className="ms-3"><div className="toc" dangerouslySetInnerHTML={{ __html: data.markdownRemark.tableOfContents }}/><hr/></div>}
-                                    {data.markdownRemark.frontmatter.tags && data.markdownRemark.frontmatter.tags.length > 0 && <div className="ms-3">{ data.markdownRemark.frontmatter.tags.map(node => ( <TagCard tag={node} keyPrefix="pagetags" /> )) }<hr/></div> }
+                                    {data.markdownRemark.frontmatter.tags && data.markdownRemark.frontmatter.tags.length > 0 && <div className="ms-3">{ data.markdownRemark.frontmatter.tags.map(node => ( <TagCard tag={node} key="wrapper{node.name}" keyPrefix="pagetags" /> )) }<hr/></div> }
                                 </div>
                             </div>
                         </div>

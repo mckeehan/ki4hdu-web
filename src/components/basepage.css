@@ -377,3 +377,7 @@ table tr:hover td {
         display: none !important;
     }
 }
+
+pre {
+  background-color: #f8f8f8;
+}
