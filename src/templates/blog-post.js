@@ -112,7 +112,7 @@ query pageUsersmckeehansrcki4HduWebsrctemplatesblogPostJs2106917372($slug: Strin
     html
     tableOfContents(maxDepth: 3)
   }
-  allMarkdownRemark(sort: {frontmatter: {title: ASC}}) {
+  allMarkdownRemark(filter: {frontmatter: {public: {eq: "yes"}}}, sort: {frontmatter: {title: ASC}}) {
     nodes {
       excerpt
       fields {

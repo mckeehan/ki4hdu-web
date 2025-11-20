@@ -1,11 +1,10 @@
 import * as React from 'react'
-import _ from 'lodash'
 import { Link } from "gatsby"
 import ReactMarkdown from 'react-markdown'
 import PhotoTagList from '../components/phototaglist'
 
 const ImageCard = ({ image }) => {
-  const albumslug = image.album_path ? image.album_path.replace(/[|&;$%@"<>()+,]/g, "").replaceAll(/ /g, '-').toLowerCase() : undefined
+  const albumslug = image.album_path ? image.album_path.replace(/[|&;$%@"<>()+,]/g, "").replaceAll(/ /g, '-').replace(/'/g,"-").replace(/ /g,'-').replace(/-+/g,'-').toLowerCase() : undefined
   const detailLink = albumslug ? "/photos" + albumslug + "/photo-" + image.image_id : undefined
   return (
                         <div key={image.name} className="col-lg-4 mb-5">
@@ -15,7 +14,7 @@ const ImageCard = ({ image }) => {
                                     {image.image_title && <div className="h5 card-title mb-3">{image.image_title}</div>}
                                     {image.image_caption && <div className="card-text mb-0"><ReactMarkdown>{image.image_caption}</ReactMarkdown></div>}
                                     {image.imageAlbums && image.imageAlbums.map( album => {
-                                      const slug = "/photos" + album.album_path.split('/').map( e => _.kebabCase(e) ).join('/');
+                                      const slug = "/photos" + albumslug;
                                       const pageTitle = album.album_path.replace(/^.*\/(.*)/, "$1").replace(/^....-..-.. /, "")
                                       return (
                                         <div className="small">

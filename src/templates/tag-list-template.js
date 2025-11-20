@@ -26,7 +26,7 @@ const TagsHome = ({ pageContext, data, location }) => {
 export const query = graphql`
 query tagListQuery($tag: String) {
   allMarkdownRemark(
-    filter: {frontmatter: {tags: {in: [$tag]}}}
+    filter: {frontmatter: {tags: {in: [$tag]}, public: {eq: "yes"}}}
     sort: {frontmatter: {title: ASC}}
   ) {
     nodes {
