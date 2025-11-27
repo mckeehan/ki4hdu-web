@@ -14,8 +14,8 @@ export default function Search({ showExcerpt, size }) {
     }
   `)
 
-  const index = searchStore.localSearchNotesIndex.index
-  const store = searchStore.localSearchNotesIndex.store
+  const index = searchStore.localSearchNotesIndex?.index
+  const store = searchStore.localSearchNotesIndex?.store
 
   const [query, setQuery] = React.useState('')
   const results = useFlexSearch(query, index, store)
@@ -27,7 +27,7 @@ export default function Search({ showExcerpt, size }) {
 
   return (
     <form className="search-form" action="/">
-      <span>{searchStore.localSearchNotesIndex.publicStoreURL}</span>
+      <span>{searchStore.localSearchNotesIndex?.publicStoreURL}</span>
       <input
         className={inputClassName}
         type="text"
