@@ -62,7 +62,7 @@ const MapPage = ({ pageContext, data, location }) => {
             </div>
         </div>
     </section>}
-    <section>
+    <section itemscope="Article" itemtype="https://schema.org/Article">
          <div className="container px-5">
              <div className="row gx-5">
                  <div className="col-lg-3 bg-light">
@@ -70,8 +70,8 @@ const MapPage = ({ pageContext, data, location }) => {
                      <div className="d-flex align-top mt-lg-5 mb-4 ">
                          <img className="rounded-circle" width="40" height="40" src={data.markdownRemark.frontmatter.author.avatar} alt={data.markdownRemark.frontmatter.author.name}/>
                          <div className="ms-3">
-                             <div className="fw-bold">{data.markdownRemark.frontmatter.author.name}</div>
-                             <div className="text-muted">{data.markdownRemark.frontmatter.date}</div>
+                             <div itemprop="author" className="fw-bold">{data.markdownRemark.frontmatter.author.name}</div>
+                             <div itemprop="datePublished" className="text-muted">{data.markdownRemark.frontmatter.date}</div>
                              {data.markdownRemark.tableOfContents && <div className="ms-3"><div className="toc" dangerouslySetInnerHTML={{ __html: data.markdownRemark.tableOfContents }}/><hr/></div>}
                              {data.markdownRemark.frontmatter.tags && data.markdownRemark.frontmatter.tags.length > 0 && <div className="ms-3">{ data.markdownRemark.frontmatter.tags.map(node => ( <TagCard tag={node} keyPrefix="mappagetags" /> )) }<hr/></div> }
                          </div>
@@ -82,11 +82,11 @@ const MapPage = ({ pageContext, data, location }) => {
                      }
                  </div>
                  <div className="col-lg-9">
-                     {!data.markdownRemark && <h1>{pageTitle}</h1>}
+                     {!data.markdownRemark && <h1 itemprop="name">{pageTitle}</h1>}
                      <article className="clearfix">
                          {data.markdownRemark && data.markdownRemark.frontmatter.featuredImage &&
                          <div className="w-50 float-md-end">
-                             <figure className="figure">
+                             <figure itemprop="thumbnail" className="figure">
                                      <Zoom>
                                      <img className="img-fluid" src={data.markdownRemark.frontmatter.featuredImage} alt="" />
                                      </Zoom>

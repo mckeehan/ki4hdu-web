@@ -13,7 +13,7 @@ const BlogPost = ({ pageContext, data, location}) => {
   const relatedNotes = data.allMarkdownRemark.nodes.filter( node => node.fields.mydir === data.markdownRemark.fields.slug );
   return (
 <BasePage pageContext={pageContext} pageTitle={data.markdownRemark.frontmatter.title} location={location} image={data.markdownRemark.frontmatter.featuredImage} description={data.markdownRemark.excerpt}>
-            <section>
+            <section itemscope="Article" itemtype="https://schema.org/Article">
                 <div className="container px-5 my-5">
                     <div className="row gx-5">
                         <div className="col-lg-3 bg-light no-print">
@@ -23,20 +23,20 @@ const BlogPost = ({ pageContext, data, location}) => {
                                 }
                                 <div className="ms-3">
                                     { data.markdownRemark.frontmatter.author &&
-                                    <div className="fw-bold">{data.markdownRemark.frontmatter.author.name}</div>
+                                    <div itemprop="author" className="fw-bold">{data.markdownRemark.frontmatter.author.name}</div>
                                     }
-                                    <div className="text-muted">{data.markdownRemark.frontmatter.date}</div>
+                                    <div itemprop="datePublished" className="text-muted">{data.markdownRemark.frontmatter.date}</div>
                                     {data.markdownRemark.tableOfContents && <div className="ms-3"><div className="toc" dangerouslySetInnerHTML={{ __html: data.markdownRemark.tableOfContents }}/><hr/></div>}
                                     {data.markdownRemark.frontmatter.tags && data.markdownRemark.frontmatter.tags.length > 0 && <div className="ms-3">{ data.markdownRemark.frontmatter.tags.map(node => ( <TagCard tag={node} key="wrapper{node.name}" keyPrefix="pagetags" /> )) }<hr/></div> }
                                 </div>
                             </div>
                         </div>
                         <div className="col-lg-9">
-                            {data.markdownRemark.frontmatter.title && <h1 className="d-none">{data.markdownRemark.frontmatter.title}</h1>}
+                            {data.markdownRemark.frontmatter.title && <h1 itemprop="name" className="d-none">{data.markdownRemark.frontmatter.title}</h1>}
                             <article className="clearfix">
                                 {data.markdownRemark.frontmatter.featuredImage &&
                                     <section className="w-50 float-md-end no-print">
-                                      <figure className="figure">
+                                      <figure itemprop="thumbnail" className="figure">
                                           <Zoom>
                                             <img className="img-fluid" src={data.markdownRemark.frontmatter.featuredImage} alt="" />
                                           </Zoom>
