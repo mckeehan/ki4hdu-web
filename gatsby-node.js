@@ -169,6 +169,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           edges {
             node {
               fields {
+                collection
                 slug
               }
             }
@@ -240,6 +241,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           edges {
             node {
               fields {
+                collection
                 slug
               }
             }
@@ -266,7 +268,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // Create blog index pages
   const posts = result.data.allMarkdownRemark.edges
-  const postsPerPage = 6
+  const postsPerPage = 12
   const numPages = Math.ceil(posts.length / postsPerPage)
   Array.from({ length: numPages }).forEach((_, i) => {
     createPage({
@@ -290,6 +292,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           edges {
             node {
               fields {
+                collection
                 slug
               }
             }
@@ -315,7 +318,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // Create notes index pages
   const notes = notes_result.data.allMarkdownRemark.edges
-  const notesPerPage = 6
+  const notesPerPage = 12
   const numNotePages = Math.ceil(notes.length / notesPerPage)
   Array.from({ length: numNotePages }).forEach((_, i) => {
     createPage({
