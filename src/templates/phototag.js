@@ -91,7 +91,7 @@ query photoTagQuery($tag_full: String) {
       creationDate(formatString: "MMMM, DD YYYY")
       full_image_path
       album_path
-      tags {
+      imageTags {
         name
         tag_full
       }

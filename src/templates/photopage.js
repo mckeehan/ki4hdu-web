@@ -50,7 +50,7 @@ const PhotoPage = ({ pageContext, data, location}) => {
 			            {image.exposureTime && <span>Exposure Time: {image.exposureTime} <br/></span>}
 			            {image.sensitivity && <span>ISO: {image.sensitivity} <br/></span>}
 			            {image.meteringMode && <span>MeteringMode: {image.meteringMode} <br/></span>}
-                  {image.tags && image.tags.length > 0 && <PhotoTagList tags={image.tags}/>}
+                  <PhotoTagList tags={image.tags}/>
 		          </div>
           </div>
         </div>

@@ -6,6 +6,7 @@ import PhotoTagList from '../components/phototaglist'
 const ImageCard = ({ image }) => {
   const albumslug = image.album_path ? image.album_path.replace(/[|&;$%@"<>()+,]/g, "").replaceAll(/ /g, '-').replace(/'/g,"-").replace(/ /g,'-').replace(/-+/g,'-').toLowerCase() : undefined
   const detailLink = albumslug ? "/photos" + albumslug + "/photo-" + image.image_id : undefined
+  const allTags = image.tags ? image.tags : image.imageTags;
   return (
                         <div key={image.name} className="col-lg-4 mb-5">
                             <div className="imagecardcomponent card h-100 shadow border-0">
@@ -23,7 +24,7 @@ const ImageCard = ({ image }) => {
                                       )
                                     })}
 
-                                    <PhotoTagList keyPrefix={image.name} tags={image.tags}/>
+                                    <PhotoTagList keyPrefix={image.name} tags={allTags}/>
                                     <div className="small">
                                         <div className="text-muted">{image.creationDate}</div>
                                         {detailLink && <div className="text-muted"><Link to={detailLink}>details</Link></div>}
