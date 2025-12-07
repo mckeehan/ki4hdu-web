@@ -4,9 +4,11 @@ import { Link } from 'gatsby'
 import { FaTag } from 'react-icons/fa'
 
 const PhotoTagList = ({ tags, keyPrefix}) => {
+    const tagsArray = Array.isArray(tags) ? tags : [tags];
+    if ( tagsArray.length === 0 ) return (null);
     return (
         <div className="ms-3">
-            {tags.map( tag => {
+            {tagsArray.map( tag => {
                 const slug = "/phototags" + tag.tag_full.split('/').map( e => _.kebabCase(e) ).join('/');
                 const key = keyPrefix + tag.name;
                 return (

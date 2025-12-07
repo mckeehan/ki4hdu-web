@@ -20,13 +20,13 @@ const IndexPage = ({ pageContext, data, location }) => {
                                 <p className="lead fw-normal text-white-50 mb-4">
                                     This is my personal website. In it I have placed information about my interest and hobbies that others may find interesting.
                                 </p>
-                                <p className="text-center">
+                                <span className="text-center">
                                    <div>
                                        <a id="follow-button" className="rounded-pill p-2 twitter-button text-white text-decoration-none" title="Follow @mckeehan on Twitter" href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fwww.ki4hdu.com%2F&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Emckeehan&amp;region=follow_link&amp;screen_name=mckeehan">
                                          <span className="text-light"><FaTwitter/> Follow <b>@mckeehan</b></span>
                                        </a>
                                    </div>
-                                </p>
+                                </span>
                             </div>
                         </div>
                         <div className="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img className="img-fluid rounded-3 my-5" src={Headshot} alt="William McKeehaan Headshot" /></div>

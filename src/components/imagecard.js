@@ -18,11 +18,12 @@ const ImageCard = ({ image }) => {
                                       const pageTitle = album.album_path.replace(/^.*\/(.*)/, "$1").replace(/^....-..-.. /, "")
                                       return (
                                         <div className="small">
-                                            in <Link to={slug}>{pageTitle}</Link>
+                                            in <Link key={slug} to={slug}>{pageTitle}</Link>
                                         </div>
                                       )
                                     })}
-                                    {image.tags && image.tags.length > 0 && <PhotoTagList keyPrefix={image.name} tags={image.tags}/>}
+
+                                    <PhotoTagList keyPrefix={image.name} tags={image.tags}/>
                                     <div className="small">
                                         <div className="text-muted">{image.creationDate}</div>
                                         {detailLink && <div className="text-muted"><Link to={detailLink}>details</Link></div>}
