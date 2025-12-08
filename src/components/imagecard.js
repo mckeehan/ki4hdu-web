@@ -18,7 +18,7 @@ const ImageCard = ({ image }) => {
                                       const slug = "/photos" + albumslug;
                                       const pageTitle = album.album_path.replace(/^.*\/(.*)/, "$1").replace(/^....-..-.. /, "")
                                       return (
-                                        <div className="small">
+                                        <div key={slug} className="small">
                                             in <Link key={slug} to={slug}>{pageTitle}</Link>
                                         </div>
                                       )
