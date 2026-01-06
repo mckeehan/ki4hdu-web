@@ -43,7 +43,7 @@ const TagsPage = ({ pageContext, data, location }) => {
   const { tag_full, pageTitle } = pageContext
   return (
       <SimpleReactLightbox>
-        <BasePage pageContext={pageContext} pageTitle={pageTitle} location={location} >
+        <BasePage pageContext={pageContext} pageTitle={pageTitle} location={location} key="basepage" >
             <section className="py-5">
                 <div className="container px-5">
                     <h1 className="fw-bolder fs-5 mb-4">{pageTitle}</h1>
@@ -53,15 +53,15 @@ const TagsPage = ({ pageContext, data, location }) => {
                             const pageTitle = child.split('/').slice(-1)[0].replace(/_/g, ' ')
                             return (
                                 <div className="tagCard card col-lg-4 col-md-6" key={`/phototags${slug}`}>
-                                  <GpxCard type="tag" link={`/phototags${slug}`} name={pageTitle}/>
+                                  <GpxCard key={`/phototags${slug}-gpx`} type="tag" link={`/phototags${slug}`} name={pageTitle}/>
                                 </div>
                             )
                         })}
                       </div>
-                    <SRLWrapper>
-                        <div className="row gx-5">
+                    <SRLWrapper key="srlwrapper">
+                        <div key="tagWrapper" className="row gx-5 wjmtagwrapper">
                         {data.mysqlTags && data.mysqlTags.taggedImages.map( node => (
-                            <ImageCard image={node}/>
+                            <ImageCard key={node.name} image={node}/>
                         ))}
                         </div>
                     </SRLWrapper>

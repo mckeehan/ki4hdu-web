@@ -5,7 +5,7 @@ import { Link } from 'gatsby'
 
 const GalleryCard = ({ album }) => {
   const pageTitle = album.album_path.replace(/^.*\/(.*)/, "$1").replace(/^....-..-.. /, "")
-  const galleryLink = "/photos" + album.album_path.replace(/'/g,"-").replace(/ /g,'-').replace(/-+/g,'-').toLowerCase()
+  const galleryLink = "/photos" + album.album_path.replaceAll(/'/g,"-").replace(/[|&;$%@"<>()+,]/g, "").replaceAll(/ /g, '-').toLowerCase()
   return (
                         <div key={album.album_date} className="col-lg-4 mb-5">
                             <div className="gallerycardcomponent card h-100 shadow border-0">

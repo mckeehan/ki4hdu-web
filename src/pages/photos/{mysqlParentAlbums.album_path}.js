@@ -18,6 +18,8 @@ const PhotoAlbum = ({ pageContext, data, location }) => {
                 <div className="container px-5">
                     <h2 className="fw-bolder fs-5 mb-4">{pageTitle}</h2>
                     {data.mysqlParentAlbums.album_caption && <ReactMarkdown rehypePlugins={[rehypeRaw]}>{data.mysqlParentAlbums.album_caption}</ReactMarkdown>}
+                </div>
+                <div className="container px-5">
                     <div className="row gx-5">
                         {
                             data.mysqlParentAlbums.albums.map(node => (
@@ -25,14 +27,14 @@ const PhotoAlbum = ({ pageContext, data, location }) => {
                             ))
                         }
                     </div>
-                    <SRLWrapper>
-                        <div className="row gx-5">
+                    <SRLWrapper className="ml-0">
+                      <div className="row gx-5">
                         {
                             data.mysqlParentAlbums.images.map(node => (
                                 <ImageCard image={node}/>
                             ))
                         }
-                        </div>
+                      </div>
                     </SRLWrapper>
                 </div>
             </section>
