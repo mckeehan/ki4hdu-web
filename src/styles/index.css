@@ -6,3 +6,7 @@
 pre {
   background-color: #f8f8f8;
 }
+
+.wpt-cmt > table {
+  margin: -10px;
+}
