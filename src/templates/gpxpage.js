@@ -64,8 +64,7 @@ const MapPage = ({ pageContext, data, location }) => {
     </section>}
     <section itemscope="Article" itemtype="https://schema.org/Article">
          <div className="container px-5">
-             <div className="row gx-5">
-                 <div className="col-lg-3 bg-light">
+             <div className="row gx-5 bg-light">
                      {data.markdownRemark && 
                      <div className="d-flex align-top mt-lg-5 mb-4 ">
                          <img className="rounded-circle" width="40" height="40" src={data.markdownRemark.frontmatter.author.avatar} alt={data.markdownRemark.frontmatter.author.name}/>
@@ -81,7 +80,7 @@ const MapPage = ({ pageContext, data, location }) => {
                      <span> Download <a href={`/gpx/${data.gpXfile.relativePath}`}>{`${data.gpXfile.name}.gpx`}</a></span>
                      }
                  </div>
-                 <div className="col-lg-9">
+                 <div className="row gx-5">
                      {!data.markdownRemark && <h1 itemprop="name">{pageTitle}</h1>}
                      <article className="clearfix">
                          {data.markdownRemark && data.markdownRemark.frontmatter.featuredImage &&
@@ -133,7 +132,6 @@ const MapPage = ({ pageContext, data, location }) => {
                          ))}
                       </div>
                     </section>
-               </div>
            </div>
        </div>
    </section>

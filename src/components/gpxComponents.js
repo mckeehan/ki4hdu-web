@@ -6,6 +6,39 @@ import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import { FaTag, FaFile, FaFolder } from 'react-icons/fa'
 
+function argbHexToRgba(hex) {
+  if (!hex) return null;
+  const clean = hex.replace('#', '');
+  if (clean.length !== 8) return null;
+  const a = parseInt(clean.substring(0, 2), 16) / 255;
+  const r = parseInt(clean.substring(2, 4), 16);
+  const g = parseInt(clean.substring(4, 6), 16);
+  const b = parseInt(clean.substring(6, 8), 16);
+  return `rgba(${r}, ${g}, ${b}, ${a.toFixed(2)})`;
+}
+
+function coloredSymbolIcon(sym, colorHex) {
+  const symbol = iconCollection.getIcon(sym);
+  const iconUrl = symbol && symbol.options && symbol.options.iconUrl;
+  const rgba = argbHexToRgba(colorHex);
+  const html = `
+    <div style="
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      background: ${rgba || 'transparent'};
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.35);
+    ">
+      <img src="${iconUrl}" width="20" height="20" style="display:block;" />
+    </div>`;
+  return L.divIcon({
+    html,
+    className: '', // strip Leaflet's default divIcon styling
+    iconSize: [28, 28],
+    popupAnchor: [0, -16],
+  });
+}
+
 let iconCollection = {
     getIcon: function(sym) {
       let symbolName = sym ? sym.toLowerCase().replace(/ /,"-") : "default";
@@ -361,9 +394,12 @@ const GpxCard = ({ name, link, type }) => {
 )}
 
 const WaypointMarker = ({ waypoint }) => {
-    const symbol = iconCollection.getIcon(waypoint.properties.sym);
+    const color = waypoint.properties.color;
+    const icon = color
+      ? coloredSymbolIcon(waypoint.properties.sym, color)
+      : iconCollection.getIcon(waypoint.properties.sym);
     return (
-        <Marker icon={symbol} position={[waypoint.geometry.coordinates[1], waypoint.geometry.coordinates[0]]} >
+        <Marker icon={icon} position={[waypoint.geometry.coordinates[1], waypoint.geometry.coordinates[0]]} >
             <Popup minWidth="150">
                 <WaypointCard waypoint={waypoint}/>
             </Popup>
