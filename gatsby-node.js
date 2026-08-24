@@ -311,6 +311,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       path: node.fields.slug,
       component: path.resolve(`./src/templates/blog-post.js`),
       context: {
+        collection: node.fields.collection,
         slug: node.fields.slug,
       },
     })
