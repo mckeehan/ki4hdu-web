@@ -62,42 +62,116 @@ const MapPage = ({ pageContext, data, location }) => {
             </div>
         </div>
     </section>}
-    <section itemscope="Article" itemtype="https://schema.org/Article">
-         <div className="container px-5">
-             <div className="row gx-5 bg-light">
-                     {data.markdownRemark && 
-                     <div className="d-flex align-top mt-lg-5 mb-4 ">
-                         <img className="rounded-circle" width="40" height="40" src={data.markdownRemark.frontmatter.author.avatar} alt={data.markdownRemark.frontmatter.author.name}/>
-                         <div className="ms-3">
-                             <div itemprop="author" className="fw-bold">{data.markdownRemark.frontmatter.author.name}</div>
-                             <div itemprop="datePublished" className="text-muted">{data.markdownRemark.frontmatter.date}</div>
-                             {data.markdownRemark.tableOfContents && <div className="ms-3"><div className="toc" dangerouslySetInnerHTML={{ __html: data.markdownRemark.tableOfContents }}/><hr/></div>}
-                             {data.markdownRemark.frontmatter.tags && data.markdownRemark.frontmatter.tags.length > 0 && <div className="ms-3">{ data.markdownRemark.frontmatter.tags.map(node => ( <TagCard tag={node} keyPrefix="mappagetags" /> )) }<hr/></div> }
-                         </div>
-                     </div>
-                     }
-                     {data.gpXfile &&
-                     <span> Download <a href={`/gpx/${data.gpXfile.relativePath}`}>{`${data.gpXfile.name}.gpx`}</a></span>
-                     }
-                 </div>
-                 <div className="row gx-5">
-                     {!data.markdownRemark && <h1 itemprop="name">{pageTitle}</h1>}
-                     <article className="clearfix">
-                         {data.markdownRemark && data.markdownRemark.frontmatter.featuredImage &&
-                         <div className="w-50 float-md-end">
-                             <figure itemprop="thumbnail" className="figure">
-                                     <Zoom>
-                                     <img className="img-fluid" src={data.markdownRemark.frontmatter.featuredImage} alt="" />
-                                     </Zoom>
-                                 {data.markdownRemark.frontmatter.featuredImageCaption && <figcaption className="figure-caption" >{data.markdownRemark.frontmatter.featuredImageCaption}</figcaption>}
-                             </figure>
-                         </div>
-                         }
-                         {data.markdownRemark && <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}/>}
-                         {data.gpXfile && data.gpXfile.properties && data.gpXfile.properties.desc && <ReactMarkdown rehypePlugins={[rehypeRaw]}>{data.gpXfile.properties.desc}</ReactMarkdown>}
-                     </article>
-                    <section className="py-5">
-                      <div className="container px-5 row">
+<section itemscope="Article" itemtype="https://schema.org/Article">
+    <div className="container px-5">
+        {data.markdownRemark ? (
+            <div className="row gx-5">
+                <div className="col-lg-4 bg-light">
+                    <div className="d-flex align-top mt-lg-5 mb-4">
+                        <img
+                            className="rounded-circle"
+                            width="40"
+                            height="40"
+                            src={data.markdownRemark.frontmatter.author.avatar}
+                            alt={data.markdownRemark.frontmatter.author.name}
+                        />
+                        <div className="ms-3">
+                            <div itemprop="author" className="fw-bold">
+                                {data.markdownRemark.frontmatter.author.name}
+                            </div>
+                            <div itemprop="datePublished" className="text-muted">
+                                {data.markdownRemark.frontmatter.date}
+                            </div>
+
+                            {data.markdownRemark.tableOfContents && (
+                                <div className="ms-3">
+                                    <div
+                                        className="toc"
+                                        dangerouslySetInnerHTML={{
+                                            __html: data.markdownRemark.tableOfContents
+                                        }}
+                                    />
+                                    <hr />
+                                </div>
+                            )}
+
+                            {data.markdownRemark.frontmatter.tags &&
+                                data.markdownRemark.frontmatter.tags.length > 0 && (
+                                    <div className="ms-3">
+                                        {data.markdownRemark.frontmatter.tags.map(node => (
+                                            <TagCard
+                                                tag={node}
+                                                keyPrefix="mappagetags"
+                                            />
+                                        ))}
+                                        <hr />
+                                    </div>
+                                )}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="col-lg-8">
+                    <article className="clearfix">
+                        {data.markdownRemark.frontmatter.featuredImage && (
+                            <div className="w-50 float-md-end">
+                                <figure itemprop="thumbnail" className="figure">
+                                    <Zoom>
+                                        <img
+                                            className="img-fluid"
+                                            src={data.markdownRemark.frontmatter.featuredImage}
+                                            alt=""
+                                        />
+                                    </Zoom>
+                                    {data.markdownRemark.frontmatter.featuredImageCaption && (
+                                        <figcaption className="figure-caption">
+                                            {data.markdownRemark.frontmatter.featuredImageCaption}
+                                        </figcaption>
+                                    )}
+                                </figure>
+                            </div>
+                        )}
+
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: data.markdownRemark.html
+                            }}
+                        />
+                    </article>
+                </div>
+            </div>
+        ) : (
+            <>
+                <div className="row gx-5">
+                    {data.gpXfile && (
+                        <span>
+                            Download{" "}
+                            <a href={`/gpx/${data.gpXfile.relativePath}`}>
+                                {`${data.gpXfile.name}.gpx`}
+                            </a>
+                        </span>
+                    )}
+                </div>
+
+                <div className="row gx-5">
+                    <h1 itemprop="name">{pageTitle}</h1>
+
+                    <article className="clearfix">
+                        {data.gpXfile &&
+                            data.gpXfile.properties &&
+                            data.gpXfile.properties.desc && (
+                                <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                                    {data.gpXfile.properties.desc}
+                                </ReactMarkdown>
+                            )}
+                    </article>
+                </div>
+            </>
+        )}
+    </div>
+</section>
+                    <section className="container py-5">
+                      <div className="container row">
                       {data.gpXfile && data.gpXfile.waypoints.sort( (a, b) => { 
                           var nameA = a.properties.name.toUpperCase();
                           var nameB = b.properties.name.toUpperCase();
@@ -132,9 +206,6 @@ const MapPage = ({ pageContext, data, location }) => {
                          ))}
                       </div>
                     </section>
-           </div>
-       </div>
-   </section>
 </BasePage>
 )}
 
