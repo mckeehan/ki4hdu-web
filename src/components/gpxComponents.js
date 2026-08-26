@@ -354,14 +354,14 @@ const TrackCard = ({ track }) => {
   const stroke = track.properties.stroke || '8B0000';
   const strokeColor = `#${stroke}`
   return (
-      <div key={track.properties.name} className="track-card">
-            <div className="d-flex align-items-center g-2 mb-1">
+      <>
+            <div className="d-flex m-1">
               <div style={{backgroundColor: strokeColor, width: '24px', height: '24px'}} className="me-2"></div>
               <b className="wpt-cmt">{track.properties.name}</b>
             </div>
             {track.properties.desc && <p className="card-text"><ReactMarkdown rehypePlugins={[rehypeRaw]}>{track.properties.desc}</ReactMarkdown></p>}
             {track.properties.time && <p className="card-text"><small className="text-muted">{track.properties.time}</small></p>}
-      </div>
+      </>
 )}
 
 const WaypointCard = ({ waypoint }) => {
@@ -369,14 +369,14 @@ const WaypointCard = ({ waypoint }) => {
   const image = symbol && symbol.options && symbol.options.iconUrl;
   const elevation = JSON.stringify(waypoint.geometry.coordinates.length === 3 ? waypoint.geometry.coordinates[2] : undefined);
   return (
-      <div key={waypoint.properties.name} className="waypoint-card">
-          <div className="d-flex align-items-center g-2 mb-1">
+      <>
+          <div className="d-flex mb-1">
               <img loading="lazy" width="24" src={image} alt={waypoint.properties.sym} className="me-2"/>
               <b className="wpt-cmt">{waypoint.properties.name}</b>
           </div>
           <div className="wpt-cmt" dangerouslySetInnerHTML={{ __html: waypoint.properties.desc}} />
           <div className="wpt-cmt mt-1">{waypoint.geometry.coordinates[1]}, {waypoint.geometry.coordinates[0]} {elevation && <span>({elevation})</span>}</div>
-      </div>
+      </>
 )}
 
 const GpxCard = ({ name, link, type }) => {

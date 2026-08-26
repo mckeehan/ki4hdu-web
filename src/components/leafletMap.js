@@ -10,11 +10,14 @@ import 'react-leaflet-fullscreen/styles.css'
 
 const LeafletMap = ({ data }) => {
     const groupRef = useRef()
+    const mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+    const outlink = '<a href="http://thunderforest.com/">Thunderforest</a>';
+    const attribution = '&copy; ' + mapLink + ' Contributors & ' + outlink;
     return (
       <MapContainer zoom='15' center={data.center}>
         <TileLayer
-          url="https://api.maptiler.com/maps/topo-v2/{z}/{x}/{y}.png?key=yoMjNkrKO1TYRL38x7Qu"
-          attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+          url="http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=6aa24fdc4de84aee82dfeecfc3ca8e13"
+          attribution={attribution}
         />
         <FullscreenControl position="topright" forceSeparateButton="true" />
         <FeatureGroup ref={groupRef}>

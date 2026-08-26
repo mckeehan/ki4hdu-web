@@ -179,8 +179,10 @@ const MapPage = ({ pageContext, data, location }) => {
                           if (nameA > nameB) { return 1; }
                           return 0;
                         }).map(waypoint => (
-                          <div className="waypointcard card col-lg-4 col-md-6" key="waypointcard-wrappepr-{waypoint.properties.name}" >
+                          <div className="col-lg-4 col-md-6 mb-5" >
+                          <div className="waypointcard card h-100 shadow border-0 p-3" key="waypointcard-wrappepr-{waypoint.properties.name}" >
                               <WaypointCard waypoint={waypoint}/>
+                          </div>
                           </div>
                       ))}
                       {data.gpXfile &&  data.gpXfile.tracks.sort( (a, b) => {
@@ -190,18 +192,24 @@ const MapPage = ({ pageContext, data, location }) => {
                           if (nameA > nameB) { return 1; }
                           return 0;
                         }).map(track => (
-                          <div className="trackcard card col-lg-4 col-md-6" key="trackcard-wrapper{track.properties.name}">
+                          <div className="col-lg-4 col-md-6 mb-5" >
+                          <div className="trackcard card h-100 shadow border-0 p-3" key="trackcard-wrapper{track.properties.name}">
                               <TrackCard track={track}/>
+                          </div>
                           </div>
                         ))}
                         {children.length > 0 && children.map( gpxdir => (
-                          <div className="gpxchild card col-lg-4 col-md-6" key="gpxchildcard-wrapper-{gpxdir.split('/').slice(-1)[0]}">
+                          <div className="col-lg-4 col-md-6 mb-5" >
+                          <div className="gpxchild card h-100 shadow border-0 p-3" key="gpxchildcard-wrapper-{gpxdir.split('/').slice(-1)[0]}">
                               <GpxCard type="folder" link={`/maps${gpxdir}`} name={gpxdir.split('/').slice(-1)[0]}/>
+                          </div>
                           </div>
                         ))}
                         {data.allGpXfile.edges && data.allGpXfile.edges.map(gpxNode => (
-                          <div className="gpxedge card col-lg-4 col-md-6" key="gpxedge-wrapper-{gpxNode.node.name}">
+                          <div className="col-lg-4 col-md-6 mb-5" >
+                          <div className="gpxedge card h-100 shadow border-0 p-3" key="gpxedge-wrapper-{gpxNode.node.name}">
                             <GpxCard type="file" name={gpxNode.node.name} link={`/maps${gpxNode.node.slug}`} />
+                          </div>
                           </div>
                          ))}
                       </div>

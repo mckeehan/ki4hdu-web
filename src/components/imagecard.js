@@ -11,7 +11,7 @@ const ImageCard = ({ image }) => {
                         <div key={image.name} className="col-lg-4 mb-5">
                             <div className="imagecardcomponent card h-100 shadow border-0">
                                 <img loading="lazy" className="card-img-top" src={image.full_image_path} alt={image.image_title} />
-                                <div className="card-body p-4">
+                                <div className="card-body p-4 overflow-auto fade-bottom">
                                     {image.image_title && <div className="h5 card-title mb-3">{image.image_title}</div>}
                                     {image.image_caption && <div className="card-text mb-0"><ReactMarkdown>{image.image_caption}</ReactMarkdown></div>}
                                     {image.imageAlbums && image.imageAlbums.map( album => {

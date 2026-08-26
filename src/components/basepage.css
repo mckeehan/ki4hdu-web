@@ -381,3 +381,18 @@ table tr:hover td {
 pre {
   background-color: #f8f8f8;
 }
+
+.card-body {
+  max-height: 150px;
+  resize: vertical;
+}
+
+.fade-bottom {
+  /* Creates a smooth fade out to white at the bottom 40px of the container */
+  -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 40px), transparent 100%);
+  mask-image: linear-gradient(to bottom, black calc(100% - 40px), transparent 100%);
+}
+
+.wpt-cmt > tr {
+  margin: 0px;
+}
