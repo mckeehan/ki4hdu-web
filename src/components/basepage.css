@@ -382,7 +382,7 @@ pre {
   background-color: #f8f8f8;
 }
 
-.card-body {
+.imagecardcomponent > .card-body {
   max-height: 150px;
   resize: vertical;
 }
