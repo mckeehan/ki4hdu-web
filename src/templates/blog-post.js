@@ -13,7 +13,7 @@ const BlogPost = ({ pageContext, data, location}) => {
   const relatedNotes = data.allMarkdownRemark.nodes.filter( node => node.fields.mydir === data.markdownRemark.fields.slug && node.fields.collection === data.markdownRemark.fields.collection );
   return (
 <BasePage pageContext={pageContext} pageTitle={data.markdownRemark.frontmatter.title} location={location} image={data.markdownRemark.frontmatter.featuredImage} description={data.markdownRemark.excerpt}>
-            <section itemscope="Article" itemtype="https://schema.org/Article" className={data.markdownRemark.fields.collection}>
+            <section itemScope="Article" itemType="https://schema.org/Article" className={data.markdownRemark.fields.collection}>
                 <div className="container px-5 my-5">
                     <div className="row gx-5">
                         <div className="col-lg-3 bg-light no-print">

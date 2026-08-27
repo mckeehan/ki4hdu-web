@@ -62,7 +62,7 @@ const MapPage = ({ pageContext, data, location }) => {
             </div>
         </div>
     </section>}
-<section itemscope="Article" itemtype="https://schema.org/Article">
+<section itemScope="Article" itemType="https://schema.org/Article">
     <div className="container px-5">
         {data.markdownRemark ? (
             <div className="row gx-5">

@@ -117,6 +117,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       node {
         name
         tag_full
+        obsidian_tag
       }
     }
   }
@@ -382,7 +383,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       path: `/tags/${tag.fieldValue}/`,
       component: path.resolve("src/templates/tag-list-template.js"),
       context: {
-        tag: tag.fieldValue,
+        tag: tag.fieldValue
       },
     })
   })
