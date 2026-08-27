@@ -198,20 +198,33 @@ const MapPage = ({ pageContext, data, location }) => {
                           </div>
                           </div>
                         ))}
-                        {children.length > 0 && children.map( gpxdir => (
+                        {children.length > 0 && children.map( gpxdir => {
+                          const markdown = data.allMarkdownRemark.nodes.find(
+                              ({ fields }) => fields.slug === gpxdir
+                              );
+                          const targetName = markdown?.frontmatter?.title || gpxdir.split('/').slice(-1)[0];
+                          return (
                           <div className="col-lg-4 col-md-6 mb-5" >
                           <div className="gpxchild card h-100 shadow border-0 p-3" key="gpxchildcard-wrapper-{gpxdir.split('/').slice(-1)[0]}">
-                              <GpxCard type="folder" link={`/maps${gpxdir}`} name={gpxdir.split('/').slice(-1)[0]}/>
+                              <GpxCard type="folder" link={`/maps${gpxdir}`} name={targetName}/>
                           </div>
                           </div>
-                        ))}
-                        {data.allGpXfile.edges && data.allGpXfile.edges.map(gpxNode => (
+                          );
+                        })}
+                        {data.allGpXfile.edges && data.allGpXfile.edges.map(gpxNode => {
+                          const markdown = data.allMarkdownRemark.nodes.find(
+                              ({ fields }) => fields.slug === gpxNode.node.slug
+                              );
+                          const targetName = markdown?.frontmatter?.title || gpxNode.node.name;
+
+                          return (
                           <div className="col-lg-4 col-md-6 mb-5" >
                           <div className="gpxedge card h-100 shadow border-0 p-3" key="gpxedge-wrapper-{gpxNode.node.name}">
-                            <GpxCard type="file" name={gpxNode.node.name} link={`/maps${gpxNode.node.slug}`} />
+                            <GpxCard type="file" name={targetName} link={`/maps${gpxNode.node.slug}`} />
                           </div>
                           </div>
-                         ))}
+                          );
+                         })}
                       </div>
                     </section>
 </BasePage>
@@ -242,6 +255,16 @@ query gpXQuery($slug: String) {
     excerpt
     html
     tableOfContents(maxDepth: 3)
+  }
+  allMarkdownRemark( filter: {fields: {collection: {eq: "gpxkml"}}}) {
+    nodes {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+      }
+    }
   }
   gpXfile(slug: {eq: $slug}) {
     slug
