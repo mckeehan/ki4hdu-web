@@ -1,51 +1,33 @@
 import * as React from "react"
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import BasePage from '../components/basepage'
 import NoteCard from '../components/notecard'
 import ImageCard from '../components/imagecard'
 import SimpleReactLightbox, { SRLWrapper } from "simple-react-lightbox"
 
-// eslint-disable-next-line no-extend-native
-Array.prototype.contains = function(v) {
-  for (var i = 0; i < this.length; i++) {
-    if (this[i] === v) return true;
-  }
-  return false;
-};
-
-// eslint-disable-next-line no-extend-native
-Array.prototype.unique = function() {
-  var arr = [];
-  for (var i = 0; i < this.length; i++) {
-    if (!arr.contains(this[i])) {
-      arr.push(this[i]);
-    }
-  }
-  return arr;
-};
-
-// eslint-disable-next-line no-extend-native
-Array.prototype.explode = function(separator) {
-  var arr = [];
-  for (var i = 0; i < this.length; i++) {
-    if(this[i]) {
-    var subarr = this[i].split(separator);
-    for (var j = 0; j <= subarr.length; j++) {
-      arr.push( subarr.slice(0,j).join(separator) )
-    }
-    }
-  }
-  return arr;
-}
-
 const TagsHome = ({ pageContext, data, location }) => {
-  const { tag } = pageContext
+  const { tag, childTags } = pageContext
   return (
       <SimpleReactLightbox>
 <BasePage pageContext={pageContext} pageTitle={tag} location={location} >
             <section className="py-5">
                 <div className="container px-5">
                     <h2 className="fw-bolder fs-5 mb-4">#{tag}</h2>
+
+                    {childTags && childTags.length > 0 && (
+                        <div key="childTags" className="mb-4">
+                            {childTags.map(child => (
+                                <Link
+                                    key={child.path}
+                                    to={`/tags/${child.path}/`}
+                                    className="btn btn-outline-secondary btn-sm me-2 mb-2"
+                                >
+                                    {child.label}
+                                </Link>
+                            ))}
+                        </div>
+                    )}
+
                     <SRLWrapper key="srlwrapper">
                     <div key="tagWrapper" className="row gx-5 wjmtagwrapper">
                         {

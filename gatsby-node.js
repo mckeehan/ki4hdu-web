@@ -364,29 +364,60 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const tag_result = await graphql(`
     {
-  tagsGroup: allMarkdownRemark {
-    group(field: {frontmatter: {tags: SELECT}}) {
-      fieldValue
+      tagsGroup: allMarkdownRemark {
+        group(field: {frontmatter: {tags: SELECT}}) {
+          fieldValue
+        }
+      }
     }
-  }
-}
   `)
 
-  // handle errors
   if (tag_result.errors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
     return
   }
 
+  // Every tag path, including every ancestor level implied by it.
+  // e.g. "places/usa/ok/natural-falls-state-park" contributes:
+  // "places", "places/usa", "places/usa/ok", "places/usa/ok/natural-falls-state-park"
+  const allTagPaths = new Set()
+
   tag_result.data.tagsGroup.group.forEach(tag => {
+    const segments = tag.fieldValue.split("/")
+    segments.forEach((_, i) => {
+      allTagPaths.add(segments.slice(0, i + 1).join("/"))
+    })
+  })
+
+  // Direct children of a tag path = paths one segment deeper that start with it
+  const getChildTags = tagPath => {
+    const depth = tagPath.split("/").length
+    return Array.from(allTagPaths)
+      .filter(
+        candidate =>
+          candidate.startsWith(`${tagPath}/`) &&
+          candidate.split("/").length === depth + 1
+      )
+      .sort()
+      .map(fullPath => ({
+        label: fullPath.split("/").pop(),
+        path: fullPath,
+      }))
+  }
+
+  allTagPaths.forEach(tagPath => {
+    const childPages = getChildTags(tagPath)
+    reporter.verbose(`Creating /tags/${tagPath} (${childPages.size})`)
     createPage({
-      path: `/tags/${tag.fieldValue}/`,
+      path: `/tags/${tagPath}/`,
       component: path.resolve("src/templates/tag-list-template.js"),
       context: {
-        tag: tag.fieldValue
+        tag: tagPath,
+        childTags: childPages
       },
     })
   })
+
 
   const photoPageQuery = await graphql(`{
   allMysqlImages {
