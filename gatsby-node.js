@@ -407,7 +407,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   allTagPaths.forEach(tagPath => {
     const childPages = getChildTags(tagPath)
-    reporter.verbose(`Creating /tags/${tagPath} (${childPages.size})`)
+    reporter.verbose(`Creating /tags/${tagPath} (${childPages.length})`)
     createPage({
       path: `/tags/${tagPath}/`,
       component: path.resolve("src/templates/tag-list-template.js"),
