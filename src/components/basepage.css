@@ -220,36 +220,117 @@ figcaption {
     background-color: rgba(100, 100, 100, 0.5);
 }
 
+/* ---------- TOC container ---------- */
 .toc {
-  margin-left: -50px;
+  margin-bottom: 1rem;
 }
 
-.toc ul {
-  margin: 0px;
-  padding-left: 0.5rem;
-  list-style: none;
+/* ---------- Toggle button (mobile default) ---------- */
+.toc-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: .5rem .75rem;
+  background: none;
+  color: var(--bs-body-color);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
 }
 
-.toc p {
-  margin: 0px;
-  padding: 0px;
+.toc-toggle:focus-visible {
+  outline: 2px solid var(--bs-primary);
+  outline-offset: 2px;
 }
 
-.toc > ul {
-  list-style: none;
+/* Chevron indicator: points down when collapsed */
+.toc-toggle::after {
+  content: "";
+  flex-shrink: 0;
+  width: .5rem;
+  height: .5rem;
+  margin-left: .5rem;
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  transition: transform .2s ease;
 }
 
-.toc > ul {
-  list-style: none;
+/* Chevron points up when expanded (React sets aria-expanded) */
+.toc-toggle[aria-expanded="true"]::after {
+  transform: rotate(-135deg);
 }
 
-.toc > ul > li > p {
+/* ---------- Collapsible content ---------- */
+/* Mobile: hidden unless open */
+.toc-content {
   display: none;
+  padding: .75rem;
+  border: 1px solid var(--bs-border-color);
+  border-top: 0;
+  border-radius: 0 0 var(--bs-border-radius) var(--bs-border-radius);
 }
 
-.toc > ul > li > a {
-  display: none;
+.toc-content.is-open {
+  display: block;
 }
+
+/* Square off the button's bottom corners while open so it joins the content */
+.toc-toggle[aria-expanded="true"] {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* ---------- Desktop: always open, toggle is a plain heading ---------- */
+@media (min-width: 769px) {
+  .toc-content {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+
+  .toc-toggle {
+    pointer-events: none;   /* not clickable */
+    cursor: default;
+    border: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .toc-toggle::after {
+    display: none;          /* hide chevron */
+  }
+}
+
+
+  .toc-content ul {
+    margin: 0px;
+    padding-left: 0.5rem;
+    list-style: none;
+  }
+  
+  .toc-content p {
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  .toc-content > ul {
+    list-style: none;
+    list-style: none;
+  }
+  
+  .toc-content > ul > li > p {
+    display: none;
+  }
+  
+  .toc-content > ul > li > a {
+    display: none;
+  }
+
+
 
 blockquote {
   background: #f9f9f9;

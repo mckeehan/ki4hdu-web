@@ -2,6 +2,7 @@ import * as React from 'react'
 import BasePage from '../components/basepage'
 import TagCard from '../components/tagcard'
 import NoteLink from '../components/notelink'
+import Toc from '../components/toc'
 import GalleryCard from '../components/gallerycard'
 import { Link, graphql } from 'gatsby'
 import Zoom from 'react-medium-image-zoom'
@@ -19,24 +20,24 @@ const BlogPost = ({ pageContext, data, location}) => {
                         <div className="col-lg-3 bg-light no-print">
                             <div className="align-top mt-lg-5 mb-4 ">
                                 { data.markdownRemark.frontmatter.author &&
-                                <img className="rounded-circle mr-1" width="40" height="40" src={data.markdownRemark.frontmatter.author.avatar} alt={data.markdownRemark.frontmatter.author.name}/>
+                                <img className="rounded-circle me-1 float-start" width="40" height="40" src={data.markdownRemark.frontmatter.author.avatar} alt={data.markdownRemark.frontmatter.author.name}/>
                                 }
                                 <div className="ms-1">
                                     { data.markdownRemark.frontmatter.author &&
-                                    <div itemprop="author" className="fw-bold">{data.markdownRemark.frontmatter.author.name}</div>
+                                    <div itemProp="author" className="fw-bold">{data.markdownRemark.frontmatter.author.name}</div>
                                     }
-                                    <div itemprop="datePublished" className="text-muted">{data.markdownRemark.frontmatter.date}</div>
-                                    {data.markdownRemark.tableOfContents && <div ><div className="toc" dangerouslySetInnerHTML={{ __html: data.markdownRemark.tableOfContents }}/><hr/></div>}
+                                    <div itemProp="datePublished" className="text-muted">{data.markdownRemark.frontmatter.date}</div>
+                                    {data.markdownRemark.tableOfContents && <Toc ><div className="toc" dangerouslySetInnerHTML={{ __html: data.markdownRemark.tableOfContents }}/><hr/></Toc>}
                                     {data.markdownRemark.frontmatter.tags && data.markdownRemark.frontmatter.tags.length > 0 && <div ><p>Related notes by tag</p>{ data.markdownRemark.frontmatter.tags.map(node => ( <TagCard tag={node} key="wrapper{node.name}" keyPrefix="pagetags" /> )) }<hr/></div> }
                                 </div>
                             </div>
                         </div>
                         <div className="col-lg-9">
-                            {data.markdownRemark.frontmatter.title && <h1 itemprop="name" className="d-none">{data.markdownRemark.frontmatter.title}</h1>}
+                            {data.markdownRemark.frontmatter.title && <h1 itemProp="name" className="d-none">{data.markdownRemark.frontmatter.title}</h1>}
                             <article className="clearfix">
                                 {data.markdownRemark.frontmatter.featuredImage &&
                                     <section className="w-50 float-md-end no-print">
-                                      <figure itemprop="thumbnail" className="figure">
+                                      <figure itemProp="thumbnail" className="figure">
                                           <Zoom>
                                             <img className="img-fluid" src={data.markdownRemark.frontmatter.featuredImage} alt="" />
                                           </Zoom>
