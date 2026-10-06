@@ -29,7 +29,6 @@
     "gatsby-remark-prismjs": "^7.14.0",
     "gatsby-remark-prismjs-copy-button": "^0.4.0",
     "gatsby-remark-relative-links": "^0.0.3",
-    "gatsby-remark-table-of-contents": "^2.0.0",
     "gatsby-remark-wiki-link": "^0.4.1",
     "gatsby-source-filesystem": "^5.12.1",
     "gatsby-source-mysql": "^2.2.3",
