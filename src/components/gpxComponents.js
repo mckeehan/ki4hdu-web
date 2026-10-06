@@ -1,10 +1,19 @@
 import * as React from "react"
 import L from 'leaflet';
 import { Link } from 'gatsby'
-import { Polyline, Marker, Popup } from "react-leaflet";
+import { Polyline, Marker, Popup, Tooltip, useMapEvent, useMap } from "react-leaflet";
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import { FaTag, FaFile, FaFolder } from 'react-icons/fa'
+
+function useZoom() {
+  const map = useMap();
+  const [zoom, setZoom] = React.useState(map.getZoom());
+  useMapEvent('zoomend', () => {
+    setZoom(map.getZoom());
+  });
+  return zoom;
+}
 
 function argbHexToRgba(hex) {
   if (!hex) return null;
@@ -393,13 +402,23 @@ const GpxCard = ({ name, link, type }) => {
             </div>
 )}
 
+const LABEL_MIN_ZOOM = 17; // tune to taste
+
 const WaypointMarker = ({ waypoint }) => {
     const color = waypoint.properties.color;
     const icon = color
       ? coloredSymbolIcon(waypoint.properties.sym, color)
       : iconCollection.getIcon(waypoint.properties.sym);
+    const zoom = useZoom();
+    const showLabel = zoom >= LABEL_MIN_ZOOM;
+
     return (
         <Marker icon={icon} position={[waypoint.geometry.coordinates[1], waypoint.geometry.coordinates[0]]} >
+            {showLabel && (
+                <Tooltip permanent direction="bottom" offset={[0, 4]} className="wpt-label">
+                    {waypoint.properties.name}
+                </Tooltip>
+            )}
             <Popup minWidth="150">
                 <WaypointCard waypoint={waypoint}/>
             </Popup>
